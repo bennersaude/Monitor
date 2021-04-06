@@ -11,6 +11,7 @@ using Monitor.Data;
 using Monitor.Domain.Business.Jobs.WebService;
 using Monitor.Domain.Entities;
 using NHibernate;
+using Monitor.Domain.Business.Jobs.Processos;
 
 namespace Monitor.Domain.Business.Jobs
 {
@@ -152,7 +153,9 @@ namespace Monitor.Domain.Business.Jobs
                 new WebServiceMonitorJob(sessionProvider,
                     ambiente,
                     new WebServiceStatusMonitor(sessionProvider),
-                    new ConectividadeServico(new Ping(new WebRequestCreate())))                    
+                    new ConectividadeServico(new Ping(new WebRequestCreate()))),
+                new ProcessosJob(sessionProvider,
+                    ambiente)                    
                 /*new MonitorTransacoesJob(sessionProvider,
                     ambiente, mapper),
                 new MonitorCacheJob(sessionProvider,
