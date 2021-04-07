@@ -350,4 +350,4 @@ MigrationBackup/
 .ionide/
 
 # Visual Studio Code
-.vscode/
+#.vscode/ #Comentado pois os arquivos para execução ficam dentro dessa pasta
