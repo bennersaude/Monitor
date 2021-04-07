@@ -1,10 +1,10 @@
 set /p versao=Informe a versão da imagem do Docker para o Monitor.Console: 
 
-dotnet restore Monitor.sln
+dotnet restore ..\..\Monitor.sln
 
 del F:\Deploy\Monitor.Console\*.* /S/Q
 
-dotnet publish -o F:\Deploy\Monitor.Console Monitor.Console\Monitor.Console.csproj
+dotnet publish -o F:\Deploy\Monitor.Console ..\..\Monitor.Console\Monitor.Console.csproj
 
 copy console.Dockerfile F:\Deploy\Monitor.Console /Y
 
