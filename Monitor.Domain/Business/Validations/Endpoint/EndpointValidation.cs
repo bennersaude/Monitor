@@ -24,7 +24,7 @@ namespace Monitor.Domain.Business.Validations.Endpoint
 
         protected void ValidarUrl()
         {
-            RuleFor(c => c.Nome)
+            RuleFor(c => c.Url)
                 .NotEmpty().WithMessage("Obrigatório informar a URL do Endpoint")
                 .Length(1, 1000).WithMessage("A Url deve conter no máximo 1000 caracteres");
         }

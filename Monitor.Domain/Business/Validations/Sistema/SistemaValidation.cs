@@ -24,14 +24,14 @@ namespace Monitor.Domain.Business.Validations.Sistema
 
         protected void ValidarCliente()
         {
-            RuleFor(c => c.Nome)
+            RuleFor(c => c.Cliente)
                 .NotEmpty().WithMessage("Obrigatório informar o cliente do ambiente")
                 .Length(1, 70).WithMessage("O nome do cliente deve conter no máximo 70 caracteres");
         }
 
         protected void ValidarCNPJ()
         {
-            RuleFor(c => c.Nome)
+            RuleFor(c => c.Cnpj)
                 .NotEmpty().WithMessage("Obrigatório informar o CNPJ do cliente")
                 .Length(1, 14).WithMessage("O CNPJ deve conter no máximo 14 caracteres");
         }
