@@ -155,7 +155,8 @@ namespace Monitor.Domain.Business.Jobs
                     new WebServiceStatusMonitor(sessionProvider),
                     new ConectividadeServico(new Ping(new WebRequestCreate()))),
                 new ProcessosJob(sessionProvider,
-                    ambiente)                    
+                    ambiente,
+                    new ProcessosMonitor(sessionProvider))
                 /*new MonitorTransacoesJob(sessionProvider,
                     ambiente, mapper),
                 new MonitorCacheJob(sessionProvider,

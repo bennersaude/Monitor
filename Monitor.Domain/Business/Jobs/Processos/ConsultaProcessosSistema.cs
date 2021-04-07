@@ -1,8 +1,10 @@
+using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading.Tasks;
 using log4net;
+using Monitor.Data;
 using Monitor.Domain.ViewModels.Processos;
 
 namespace Monitor.Domain.Business.Jobs.Processos
@@ -11,22 +13,38 @@ namespace Monitor.Domain.Business.Jobs.Processos
     {
         private readonly HttpClient client = new HttpClient();
         private static readonly ILog logger = LogManager.GetLogger(typeof(ProcessosJob));
-        public async Task ConsultarProcessosAsync(string endpoint)
+        private readonly ISessionProvider monitorSessionProvider;
+
+        public ConsultaProcessosSistema(ISessionProvider monitorSessionProvider)
         {
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
-            /*client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
-            client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter");*/
+            this.monitorSessionProvider = monitorSessionProvider;
+        }
+        public async Task ConsultarProcessosAsync(Entities.Sistema sistema, ProcessosMonitor processosMonitor)
+        {
+            string endpointCompleto=string.Empty;
+            var data = DateTime.Now;
+            var processosSistema = new ProcessosSistemaViewModel();
+            try
+            {
+                client.Timeout = TimeSpan.FromMilliseconds(sistema.Ambiente.TimeoutMilissegundosWebServiceChecks);
+                var dataString = string.Format("/{0}-{1}-{2}", data.Year, data.Month, data.Day);
+                endpointCompleto = sistema.UrlConsultaProcessos.EndsWith('/') ? 
+                  sistema.UrlConsultaProcessos.Substring(0,sistema.UrlConsultaProcessos.Length-1) : sistema.UrlConsultaProcessos;
+                endpointCompleto = String.Concat(endpointCompleto,dataString);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+                var streamTask = client.GetStreamAsync(endpointCompleto);
+                processosSistema = await JsonSerializer.DeserializeAsync<ProcessosSistemaViewModel>(await streamTask);
+            }
+            catch (System.Exception ex)
+            {
+                logger.Info($"Problema ao consultar Processos do endpoint: {endpointCompleto}. Erro: {ex.ToString()}.");
+                processosSistema.Mensagem = ex.ToString().Substring(0, Math.Min(ex.ToString().Length, 1000));
+            }
 
-            /*var stringTask = client.GetStringAsync(endpoint);
-            var msg = await stringTask;
-            logger.Info($"[Endpoint: {endpoint}] Resultado: {msg}");*/
-
-            var streamTask = client.GetStreamAsync(endpoint);
-            var processosSistema = await JsonSerializer.DeserializeAsync<ProcessosSistemaViewModel>(await streamTask);
-            logger.Info($"[Endpoint: {endpoint}] Resultado: Sistema={processosSistema.Sistema} - FinalizadosSucesso={processosSistema.FinalizadosSucesso}");
+            processosMonitor.RegistrarProcessos(sistema, processosSistema, endpointCompleto, data); 
+            
         }
     }
 }

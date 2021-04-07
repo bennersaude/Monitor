@@ -8,5 +8,6 @@ namespace Monitor.Domain.Business.Commands.Sistema
         public string Cliente { get; protected set; }
         public string Cnpj { get; protected set; }
         public bool MonitoramentoAtivo { get; protected set; }
+        public string UrlConsultaProcessos { get; protected set; }
     }
 }

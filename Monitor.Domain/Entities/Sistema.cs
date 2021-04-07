@@ -23,6 +23,9 @@ namespace Monitor.Domain.Entities
 
         public virtual bool MonitoramentoAtivo { get; set; }
 
+        [StringLength(1000)]
+        public virtual string UrlConsultaProcessos { get; set; }
+
         public virtual ICollection<Endpoint> Endpoints { get; set; }
 
         public override string ToString()
@@ -37,6 +40,7 @@ namespace Monitor.Domain.Entities
             this.HandleAmbiente = sistemaOrigem.HandleAmbiente;
             this.Cliente = sistemaOrigem.Cliente;
             this.Cnpj = sistemaOrigem.Cnpj;
+            this.UrlConsultaProcessos = sistemaOrigem.UrlConsultaProcessos;
         }
     }
 }
