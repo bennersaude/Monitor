@@ -27,7 +27,7 @@ namespace Monitor.Domain.Business.Jobs.Processos
             try
             {
                 client.Timeout = TimeSpan.FromMilliseconds(sistema.Ambiente.TimeoutMilissegundosWebServiceChecks);
-                var dataString = string.Format("/{0}-{1}-{2}", data.Year, data.Month, data.Day);
+                var dataString = string.Format("/{0}-{1}-{2}", data.Year.ToString("00"), data.Month.ToString("00"), data.Day.ToString("00"));
                 endpointCompleto = sistema.UrlConsultaProcessos.EndsWith('/') ? 
                   sistema.UrlConsultaProcessos.Substring(0,sistema.UrlConsultaProcessos.Length-1) : sistema.UrlConsultaProcessos;
                 endpointCompleto = String.Concat(endpointCompleto,dataString);
