@@ -15,23 +15,23 @@ using NHibernate.Linq;
 using Polly;
 using Polly.Timeout;
 
-namespace Monitor.Domain.Business.Jobs.Processos
+namespace Monitor.Domain.Business.Jobs.Informacoes
 {
-    public class ProcessosJob : IMonitorJob
+    public class InformacoesJob : IMonitorJob
     {
         private const string TIMEOUT = "timeout";
         private const int MILLISECONDS_IN_SECOND = 1000;
-        private static readonly ILog logger = LogManager.GetLogger(typeof(ProcessosJob));
+        private static readonly ILog logger = LogManager.GetLogger(typeof(InformacoesJob));
         private readonly ISessionProvider monitorSessionProvider;
         private readonly Ambiente ambiente;
-        private readonly IProcessosMonitor processosMonitor;
+        private readonly IInformacoesMonitor informacoesMonitor;
 
-        public ProcessosJob(ISessionProvider monitorSessionProvider,
-            Ambiente ambiente, ProcessosMonitor processosMonitor)
+        public InformacoesJob(ISessionProvider monitorSessionProvider,
+            Ambiente ambiente, IInformacoesMonitor informacoesMonitor)
         {
             this.monitorSessionProvider = monitorSessionProvider;
             this.ambiente = ambiente;
-            this.processosMonitor = processosMonitor;
+            this.informacoesMonitor = informacoesMonitor;
         }
 
         public void StartMonitoring(CancellationToken ct)
@@ -59,28 +59,28 @@ namespace Monitor.Domain.Business.Jobs.Processos
             using (var monitorSession = monitorSessionProvider.OpenSession())
             {
                 sistemas = monitorSession.Query<Sistema>().Where(c => c.Ambiente.Handle == ambiente.Handle 
-                  && c.UrlConsultaProcessos != null && c.UrlConsultaProcessos != string.Empty);
+                  && c.UrlConsultaInformacoes != null && c.UrlConsultaInformacoes != string.Empty);
 
                 foreach (var sistema in sistemas)
                 {
                     try
                     {  
                         var nomeAmbiente = sistema.Ambiente.Nome; 
-                        ConsultarProcessosSistema(sistema); 
+                        ConsultarInformacoesSistema(sistema); 
                     }
                     catch (Exception ex)
                     {
-                        logger.Error($"*** Falha ao consultar processos para o ambiente {ambiente.Nome} e sistema {sistema.Nome}: {ex}");
+                        logger.Error($"*** Falha ao consultar informações para o ambiente {ambiente.Nome} e sistema {sistema.Nome}: {ex}");
                     }
                 }
             }
         }
 
-        private void ConsultarProcessosSistema(Entities.Sistema sistema)
+        private void ConsultarInformacoesSistema(Entities.Sistema sistema)
         {
             logger.Info($"[{ambiente.Nome}] Consultando processos do sistema {sistema.Nome}");
-            var consultaProcessosSistema = new ConsultaProcessosSistema(monitorSessionProvider);
-            Task.Run(() => consultaProcessosSistema.ConsultarProcessosAsync(sistema, processosMonitor));
+            var consultaInformacoesSistema = new ConsultaInformacoesSistema(monitorSessionProvider);
+            Task.Run(() => consultaInformacoesSistema.ConsultarInformacoesAsync(sistema, informacoesMonitor));
         }
 
     }

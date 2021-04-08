@@ -49,11 +49,11 @@ namespace Monitor.Domain.Business.Commands
             CreateMap<IncluirSistemaViewModel, IncluirSistemaCommand>(MemberList.None)
                 .ConstructUsing(c => new IncluirSistemaCommand(c.Nome,
                     c.MonitoramentoAtivo, c.HandleAmbiente,
-                    c.Cliente, c.Cnpj, c.UrlConsultaProcessos));
+                    c.Cliente, c.Cnpj, c.UrlConsultaProcessos, c.UrlConsultaInformacoes));
             CreateMap<EditarSistemaViewModel, EditarSistemaCommand>(MemberList.None)
                 .ConstructUsing(c => new EditarSistemaCommand(c.Handle, c.Nome,
                     c.MonitoramentoAtivo, c.HandleAmbiente,
-                    c.Cliente, c.Cnpj, c.UrlConsultaProcessos));
+                    c.Cliente, c.Cnpj, c.UrlConsultaProcessos, c.UrlConsultaInformacoes));
             CreateMap<long, ExcluirSistemaCommand>(MemberList.None)
                 .ConstructUsing(c => new ExcluirSistemaCommand(c));            
             CreateMap<IncluirSistemaCommand, Entities.Sistema>(MemberList.None)

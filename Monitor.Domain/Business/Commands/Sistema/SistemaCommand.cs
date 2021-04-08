@@ -9,5 +9,6 @@ namespace Monitor.Domain.Business.Commands.Sistema
         public string Cnpj { get; protected set; }
         public bool MonitoramentoAtivo { get; protected set; }
         public string UrlConsultaProcessos { get; protected set; }
+        public string UrlConsultaInformacoes {get; protected set;}
     }
 }

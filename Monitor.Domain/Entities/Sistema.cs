@@ -26,6 +26,9 @@ namespace Monitor.Domain.Entities
         [StringLength(1000)]
         public virtual string UrlConsultaProcessos { get; set; }
 
+        [StringLength(1000)]
+        public virtual string UrlConsultaInformacoes { get; set; }
+
         public virtual ICollection<Endpoint> Endpoints { get; set; }
 
         public override string ToString()
@@ -41,6 +44,7 @@ namespace Monitor.Domain.Entities
             this.Cliente = sistemaOrigem.Cliente;
             this.Cnpj = sistemaOrigem.Cnpj;
             this.UrlConsultaProcessos = sistemaOrigem.UrlConsultaProcessos;
+            this.UrlConsultaInformacoes = sistemaOrigem.UrlConsultaInformacoes;
         }
     }
 }

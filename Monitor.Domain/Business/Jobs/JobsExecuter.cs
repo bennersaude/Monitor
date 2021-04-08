@@ -12,6 +12,7 @@ using Monitor.Domain.Business.Jobs.WebService;
 using Monitor.Domain.Entities;
 using NHibernate;
 using Monitor.Domain.Business.Jobs.Processos;
+using Monitor.Domain.Business.Jobs.Informacoes;
 
 namespace Monitor.Domain.Business.Jobs
 {
@@ -156,11 +157,10 @@ namespace Monitor.Domain.Business.Jobs
                     new ConectividadeServico(new Ping(new WebRequestCreate()))),
                 new ProcessosJob(sessionProvider,
                     ambiente,
-                    new ProcessosMonitor(sessionProvider))
-                /*new MonitorTransacoesJob(sessionProvider,
-                    ambiente, mapper),
-                new MonitorCacheJob(sessionProvider,
-                    ambiente, mapper)*/
+                    new ProcessosMonitor(sessionProvider)),
+                new InformacoesJob(sessionProvider,
+                    ambiente,
+                    new InformacoesMonitor(sessionProvider))
             };
             var cancellationTokenSource = new CancellationTokenSource();
             jobs.Add(ambiente, monitors);

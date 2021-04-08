@@ -12,14 +12,14 @@ namespace Monitor.Domain.Business.Jobs.Processos
     public class ConsultaProcessosSistema : IConsultaProcessosSistema
     {
         private readonly HttpClient client = new HttpClient();
-        private static readonly ILog logger = LogManager.GetLogger(typeof(ProcessosJob));
+        private static readonly ILog logger = LogManager.GetLogger(typeof(ConsultaProcessosSistema));
         private readonly ISessionProvider monitorSessionProvider;
 
         public ConsultaProcessosSistema(ISessionProvider monitorSessionProvider)
         {
             this.monitorSessionProvider = monitorSessionProvider;
         }
-        public async Task ConsultarProcessosAsync(Entities.Sistema sistema, ProcessosMonitor processosMonitor)
+        public async Task ConsultarProcessosAsync(Entities.Sistema sistema, IProcessosMonitor processosMonitor)
         {
             string endpointCompleto=string.Empty;
             var data = DateTime.Now;

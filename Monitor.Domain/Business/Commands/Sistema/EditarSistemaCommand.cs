@@ -16,7 +16,8 @@ namespace Monitor.Domain.Business.Commands.Sistema
             long handleAmbiente,
             string cliente,
             string cnpj,
-            string urlConsultaProcessos)
+            string urlConsultaProcessos,
+            string urlConsultaInformacoes)
         {
             this.Handle = handle;
             this.Nome = nome;
@@ -25,6 +26,7 @@ namespace Monitor.Domain.Business.Commands.Sistema
             this.Cliente = cliente;
             this.Cnpj = cnpj;
             this.UrlConsultaProcessos = urlConsultaProcessos;
+            this.UrlConsultaInformacoes = urlConsultaInformacoes;
         }
 
         public override bool IsValid(ISession session)

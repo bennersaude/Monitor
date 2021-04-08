@@ -10,5 +10,6 @@ namespace Monitor.Domain.ViewModels.Sistema
         public string Cnpj { get; set; }
         public bool MonitoramentoAtivo { get; set; } = true;
         public string UrlConsultaProcessos { get; set; }
+        public string UrlConsultaInformacoes { get; set; }
     }
 }

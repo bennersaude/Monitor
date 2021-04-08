@@ -5,7 +5,7 @@ namespace Monitor.Domain.Business.Jobs.Processos
 {
     public interface IConsultaProcessosSistema
     {
-        Task ConsultarProcessosAsync(Entities.Sistema sistema, ProcessosMonitor processosMonitor);
+        Task ConsultarProcessosAsync(Entities.Sistema sistema, IProcessosMonitor processosMonitor);
          
     }
 }

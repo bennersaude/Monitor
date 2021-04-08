@@ -16,6 +16,7 @@ namespace Monitor.Domain.Entities.Mappings
             Map(x => x.Cnpj);
             Map(x => x.MonitoramentoAtivo);
             Map(x => x.UrlConsultaProcessos).Nullable();
+            Map(x => x.UrlConsultaInformacoes).Nullable();
             HasMany(x => x.Endpoints).Cascade.AllDeleteOrphan();
             References(x => x.Ambiente, "HandleAmbiente");
         }
