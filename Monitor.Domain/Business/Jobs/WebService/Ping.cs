@@ -107,6 +107,7 @@ namespace Monitor.Domain.Business.Jobs.WebService
         {
             respostaPing.Mensagem = e.Message;
             respostaPing.ServicoAtivo = false;
+            respostaPing.HttpStatus = (int?)(e.Response as HttpWebResponse)?.StatusCode;
         }
     }
 }

@@ -135,6 +135,8 @@ namespace Monitor.Domain.Business.Jobs.WebService
             }
             timer.Stop();
 
+            if (excecao == null && respostaPing.ServicoAtivo == false)
+                excecao = new Exception(respostaPing.Mensagem);
 
             var dados = new WebServiceCheck()
             {
