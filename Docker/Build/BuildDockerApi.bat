@@ -1,6 +1,6 @@
 set /p versao=Informe a versão da imagem do Docker para o Monitor.Api: 
 
-dotnet restore ..\..\Montor.sln
+dotnet restore ..\..\Monitor.sln
 
 del F:\Deploy\Monitor.Api\*.* /S/Q
 
