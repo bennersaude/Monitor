@@ -23,7 +23,7 @@ namespace Monitor.Domain.Business.Jobs.Processos
         {
             string endpointCompleto=string.Empty;
             var data = DateTime.Now;
-            var processosSistema = new ProcessosSistemaViewModel();
+            var processosSistema = new ProcessosSistemaViewModel{Sucesso = false};
             try
             {
                 client.Timeout = TimeSpan.FromMilliseconds(sistema.Ambiente.TimeoutMilissegundosWebServiceChecks);
@@ -36,6 +36,7 @@ namespace Monitor.Domain.Business.Jobs.Processos
                     new MediaTypeWithQualityHeaderValue("application/json"));
                 var streamTask = client.GetStreamAsync(endpointCompleto);
                 processosSistema = await JsonSerializer.DeserializeAsync<ProcessosSistemaViewModel>(await streamTask);
+                processosSistema.Sucesso = true;
             }
             catch (System.Exception ex)
             {

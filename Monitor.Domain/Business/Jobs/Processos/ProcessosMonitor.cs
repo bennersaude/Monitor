@@ -20,14 +20,18 @@ namespace Monitor.Domain.Business.Jobs.Processos
             {
                 long? totalAnteriorProcessosFinalizadosSucesso = 0;
                 long? totalAnteriorProcessosFinalizadosErro = 0;
-                var registroAnterior = monitorSession.Query<ProcessosCheck>()
-                    .Where(x => x.HandleSistema == sistema.Handle && x.DataHoraConsulta >= data.Date && x.DataHoraConsulta < data)
-                    .OrderByDescending(x => x.DataHoraConsulta).Take(1).ToList();
-                
-                if ((registroAnterior != null) && (registroAnterior.Any()))
+                if (processos.Sucesso)
                 {
-                    totalAnteriorProcessosFinalizadosSucesso = registroAnterior.First().TotalFinalizadosSucesso;
-                    totalAnteriorProcessosFinalizadosErro = registroAnterior.First().TotalFinalizadosErro;
+                    var registroAnterior = monitorSession.Query<ProcessosCheck>()
+                        .Where(x => x.HandleSistema == sistema.Handle && x.DataHoraConsulta >= data.Date &&
+                            x.DataHoraConsulta < data && x.Sucesso == true)
+                        .OrderByDescending(x => x.DataHoraConsulta).Take(1).ToList();
+                    
+                    if ((registroAnterior != null) && (registroAnterior.Any()))
+                    {
+                        totalAnteriorProcessosFinalizadosSucesso = registroAnterior.First().TotalFinalizadosSucesso;
+                        totalAnteriorProcessosFinalizadosErro = registroAnterior.First().TotalFinalizadosErro;
+                    }
                 }
                 
                 var dados = new ProcessosCheck()
@@ -47,7 +51,8 @@ namespace Monitor.Domain.Business.Jobs.Processos
                     Mensagem = processos.Mensagem,
                     DataHoraRequisicao = data,
                     DataHoraResposta = DateTime.Now,
-                    DuracaoMilisegundosRequisicao = Convert.ToInt64((DateTime.Now - data).TotalMilliseconds)
+                    DuracaoMilisegundosRequisicao = Convert.ToInt64((DateTime.Now - data).TotalMilliseconds),
+                    Sucesso = processos.Sucesso
                 };
                 
                 monitorSession.BeginTransaction();

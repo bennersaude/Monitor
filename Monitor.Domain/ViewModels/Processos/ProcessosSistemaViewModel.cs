@@ -11,6 +11,7 @@ namespace Monitor.Domain.ViewModels.Processos
         public long FinalizadosSucesso { get; set; }
         public long FinalizadosErro { get; set; }
         public string Mensagem { get; set; }
+        public bool Sucesso { get; set; }
         
     }
 }

@@ -24,7 +24,8 @@ namespace Monitor.Domain.Entities.Mappings
             Map(x => x.Mensagem).Nullable();
             Map(x => x.DataHoraRequisicao).Nullable();
             Map(x => x.DataHoraResposta).Nullable();
-            Map(x => x.DuracaoMilisegundosRequisicao).Nullable();;
+            Map(x => x.DuracaoMilisegundosRequisicao).Nullable();
+            Map(x => x.Sucesso).Nullable();
         }
     }
 }

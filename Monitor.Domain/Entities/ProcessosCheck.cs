@@ -26,5 +26,6 @@ namespace Monitor.Domain.Entities
         public virtual DateTime? DataHoraRequisicao { get; set; }
         public virtual DateTime? DataHoraResposta { get; set; }
         public virtual long? DuracaoMilisegundosRequisicao { get; set; }
+        public virtual bool Sucesso { get; set; }
     }
 }
