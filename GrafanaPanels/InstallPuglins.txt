@@ -1,0 +1,4 @@
+Instalar os plugins abaixo para que os paineis possam ser importados
+
+grafana-cli plugins install flant-statusmap-panel
+grafana-cli plugins install grafana-piechart-panel

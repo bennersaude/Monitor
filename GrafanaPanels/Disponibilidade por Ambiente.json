@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 4,
-  "iteration": 1617730816571,
+  "id": 3,
+  "iteration": 1617889314685,
   "links": [],
   "panels": [
     {
@@ -281,5 +281,5 @@
   "timezone": "",
   "title": "Disponibilidade por Ambiente",
   "uid": "djUdPDlGz",
-  "version": 11
+  "version": 2
 }

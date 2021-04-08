@@ -1,0 +1,386 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "id": 5,
+    "iteration": 1617889522987,
+    "links": [],
+    "panels": [
+      {
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 4,
+          "x": 0,
+          "y": 0
+        },
+        "id": 7,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "7.4.2",
+        "targets": [
+          {
+            "alias": "",
+            "format": "time_series",
+            "rawSql": "SELECT\r\n  DATEDIFF(second, '1970-01-01', getdate()) AS time,\r\n  sum(H.FinalizadosSucesso) + sum(H.FinalizadosErro) Total\r\nFROM\r\n  ProcessosCheck H\r\nJOIN \r\n  Sistema S on S.Handle = H.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = H.HandleAmbiente\r\nWHERE\r\n  $__timeFilter(H.DataHoraConsulta) \r\n  and Sucesso = 1\r\n  and S.Nome = '$Sistema' \r\n  and A.Nome = '$Ambiente'\r\nORDER BY 1",
+            "refId": "A"
+          }
+        ],
+        "title": "Total",
+        "type": "stat"
+      },
+      {
+        "aliasColors": {},
+        "breakPoint": "50%",
+        "cacheTimeout": null,
+        "combine": {
+          "label": "Others",
+          "threshold": 0
+        },
+        "datasource": null,
+        "decimals": null,
+        "fieldConfig": {
+          "defaults": {
+            "color": {},
+            "custom": {},
+            "thresholds": {
+              "mode": "absolute",
+              "steps": []
+            }
+          },
+          "overrides": []
+        },
+        "fontSize": "100%",
+        "format": "none",
+        "gridPos": {
+          "h": 8,
+          "w": 6,
+          "x": 4,
+          "y": 0
+        },
+        "id": 4,
+        "interval": null,
+        "legend": {
+          "header": "",
+          "percentage": true,
+          "percentageDecimals": 2,
+          "show": true,
+          "sideWidth": null,
+          "values": true
+        },
+        "legendType": "On graph",
+        "links": [],
+        "nullPointMode": "connected",
+        "pieType": "pie",
+        "pluginVersion": "7.4.2",
+        "strokeWidth": 1,
+        "targets": [
+          {
+            "alias": "",
+            "format": "time_series",
+            "rawSql": "SELECT\r\n  DATEDIFF(second, '1970-01-01', getdate()) AS time,\r\n  sum(H.FinalizadosSucesso) FinalizadosSucesso,\r\n  sum(H.FinalizadosErro) FinalizadosErro\r\nFROM\r\n  ProcessosCheck H\r\nJOIN \r\n  Sistema S on S.Handle = H.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = H.HandleAmbiente\r\nWHERE\r\n  $__timeFilter(H.DataHoraConsulta) \r\n  and Sucesso = 1\r\n  and S.Nome = '$Sistema' \r\n  and A.Nome = '$Ambiente'\r\nORDER BY 1",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Finalizados",
+        "type": "grafana-piechart-panel",
+        "valueName": "current"
+      },
+      {
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 9,
+          "x": 10,
+          "y": 0
+        },
+        "id": 5,
+        "options": {
+          "reduceOptions": {
+            "calcs": [
+              "max"
+            ],
+            "fields": "",
+            "limit": 100,
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "text": {}
+        },
+        "pluginVersion": "7.4.2",
+        "targets": [
+          {
+            "alias": "",
+            "format": "time_series",
+            "rawSql": "SELECT\r\n  DATEDIFF(second, '1970-01-01', getdate()) AS time,\r\n  max(H.ProcessosPendentes) MaximoProcessosPendentes,\r\n  max(H.ProcessosExecutando) MaximoProcessosExecutando\r\nFROM\r\n  ProcessosCheck H\r\nJOIN \r\n  Sistema S on S.Handle = H.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = H.HandleAmbiente\r\nWHERE\r\n  $__timeFilter(H.DataHoraConsulta) \r\n  and Sucesso = 1\r\n  and S.Nome = '$Sistema' \r\n  and A.Nome = '$Ambiente'\r\nORDER BY 1",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Executando",
+        "type": "gauge"
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {
+            "custom": {}
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 11,
+          "w": 24,
+          "x": 0,
+          "y": 8
+        },
+        "hiddenSeries": false,
+        "id": 2,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.4.2",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [
+          {
+            "$$hashKey": "object:252",
+            "alias": "FinalizadosErro",
+            "color": "#F2495C",
+            "fill": 2
+          }
+        ],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "alias": "",
+            "format": "time_series",
+            "rawSql": "SELECT\r\n  $__timeEpoch(H.DataHoraConsulta),\r\n  H.FinalizadosSucesso,\r\n  H.FinalizadosErro,\r\n  ProcessosPendentes,\r\n  ProcessosExecutando\r\nFROM\r\n  ProcessosCheck H\r\nJOIN \r\n  Sistema S on S.Handle = H.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = H.HandleAmbiente\r\nWHERE\r\n  $__timeFilter(H.DataHoraConsulta) \r\n  and Sucesso = 1\r\n  and S.Nome = '$Sistema' \r\n  and A.Nome = '$Ambiente'\r\nORDER BY\r\n  H.DataHoraConsulta ASC",
+            "refId": "A"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "Processos",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:206",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "$$hashKey": "object:207",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      }
+    ],
+    "refresh": "1m",
+    "schemaVersion": 27,
+    "style": "dark",
+    "tags": [
+      "processos"
+    ],
+    "templating": {
+      "list": [
+        {
+          "allValue": null,
+          "current": {
+            "selected": false,
+            "text": "Qualidade",
+            "value": "Qualidade"
+          },
+          "datasource": null,
+          "definition": "SELECT Nome FROM Ambiente",
+          "description": null,
+          "error": null,
+          "hide": 0,
+          "includeAll": false,
+          "label": null,
+          "multi": false,
+          "name": "Ambiente",
+          "options": [],
+          "query": "SELECT Nome FROM Ambiente",
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 1,
+          "tagValuesQuery": "",
+          "tags": [],
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        },
+        {
+          "allValue": null,
+          "current": {
+            "selected": false,
+            "text": "QUALIDADEAGCORRENTE",
+            "value": "QUALIDADEAGCORRENTE"
+          },
+          "datasource": null,
+          "definition": "SELECT S.NOME\nFROM SISTEMA S\nJOIN AMBIENTE A ON A.HANDLE  = S.HANDLEAMBIENTE\nWHERE A.NOME = '$Ambiente'",
+          "description": null,
+          "error": null,
+          "hide": 0,
+          "includeAll": false,
+          "label": null,
+          "multi": false,
+          "name": "Sistema",
+          "options": [
+            {
+              "selected": true,
+              "text": "QUALIDADEAGCORRENTE",
+              "value": "QUALIDADEAGCORRENTE"
+            },
+            {
+              "selected": false,
+              "text": "QUALIDADEAGHOM",
+              "value": "QUALIDADEAGHOM"
+            }
+          ],
+          "query": "SELECT S.NOME\nFROM SISTEMA S\nJOIN AMBIENTE A ON A.HANDLE  = S.HANDLEAMBIENTE\nWHERE A.NOME = '$Ambiente'",
+          "refresh": 0,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 1,
+          "tagValuesQuery": "",
+          "tags": [],
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        }
+      ]
+    },
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Processos por Sistema",
+    "uid": "7Y-qyQlMk",
+    "version": 21
+  }

@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 5,
-  "iteration": 1617730842768,
+  "id": 4,
+  "iteration": 1617889348764,
   "links": [],
   "panels": [
     {
@@ -55,7 +55,7 @@
           }
         ]
       },
-      "datasource": "MGA-RANDRADE-MonitorLocal",
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -157,7 +157,7 @@
           }
         ]
       },
-      "datasource": "MGA-RANDRADE-MonitorLocal",
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -223,7 +223,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "MGA-RANDRADE-MonitorLocal",
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "custom": {},
@@ -354,7 +354,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "MGA-RANDRADE-MonitorLocal",
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "custom": {},
@@ -455,7 +455,7 @@
     },
     {
       "columns": [],
-      "datasource": "MGA-RANDRADE-MonitorLocal",
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -518,7 +518,7 @@
     },
     {
       "columns": [],
-      "datasource": "MGA-RANDRADE-MonitorLocal",
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -595,7 +595,7 @@
           "text": "Produção Clientes AG",
           "value": "Produção Clientes AG"
         },
-        "datasource": "MGA-RANDRADE-MonitorLocal",
+        "datasource": null,
         "definition": "SELECT Nome FROM Ambiente",
         "description": null,
         "error": null,
@@ -623,7 +623,7 @@
           "text": "Assefaz - AG",
           "value": "Assefaz - AG"
         },
-        "datasource": "MGA-RANDRADE-MonitorLocal",
+        "datasource": null,
         "definition": "SELECT S.NOME\nFROM SISTEMA S\nJOIN AMBIENTE A ON A.HANDLE  = S.HANDLEAMBIENTE\nWHERE A.NOME = '$Ambiente'",
         "description": null,
         "error": null,
@@ -667,5 +667,5 @@
   "timezone": "",
   "title": "Disponibilidade por Sistema",
   "uid": "93VQ81qZk",
-  "version": 8
+  "version": 3
 }

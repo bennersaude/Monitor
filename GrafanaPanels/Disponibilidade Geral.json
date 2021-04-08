@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 6,
+  "id": 2,
   "links": [],
   "panels": [
     {
@@ -285,17 +285,13 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "10m",
+        "for": "5m",
         "frequency": "1m",
         "handler": 1,
         "message": "Existem serviços indisponíveis",
         "name": "Serviços com Falha",
         "noDataState": "alerting",
-        "notifications": [
-          {
-            "uid": "Dm_1lPlMk"
-          }
-        ]
+        "notifications": []
       },
       "aliasColors": {},
       "bars": false,
@@ -421,17 +417,16 @@
       "dashboardFilter": "",
       "dashboardTags": [],
       "datasource": null,
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "custom": {}
         },
         "overrides": []
       },
-      "folderId": 3,
+      "folderId": null,
       "gridPos": {
         "h": 3,
-        "w": 7,
+        "w": 11,
         "x": 0,
         "y": 23
       },
@@ -454,7 +449,6 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Alertas",
-      "transparent": true,
       "type": "alertlist"
     }
   ],
@@ -475,5 +469,5 @@
   "timezone": "",
   "title": "Disponibilidade Geral",
   "uid": "djUbPDlGa",
-  "version": 13
+  "version": 7
 }
