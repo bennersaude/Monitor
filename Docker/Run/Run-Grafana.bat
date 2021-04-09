@@ -1,0 +1,1 @@
+docker run -d --volume "E:\Docker\dataGrafanaBenner:/var/lib/grafana" -p 3100:3000 --name grafanaBennerLocal grafana/grafana
