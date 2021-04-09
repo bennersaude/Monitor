@@ -1,0 +1,713 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "id": 11,
+    "iteration": 1617979061379,
+    "links": [],
+    "panels": [
+      {
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 0,
+          "y": 0
+        },
+        "id": 4,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "/.*/",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "7.4.2",
+        "targets": [
+          {
+            "alias": "",
+            "format": "table",
+            "rawSql": "SELECT top 1 c.VersaoDoSistema\r\nFROM\r\n  InformacoesCheck C\r\nJOIN \r\n  Sistema S on S.Handle = C.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = C.HandleAmbiente  \r\nWHERE\r\n  S.Nome = '$Sistema' \r\n  and A.Nome = '$Ambiente'\r\n  and C.Sucesso = 1\r\n  order by C.datahoraconsulta desc",
+            "refId": "A"
+          }
+        ],
+        "title": "Versão Atual do Sistema",
+        "type": "stat"
+      },
+      {
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 3,
+          "y": 0
+        },
+        "id": 5,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "/.*/",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "7.4.2",
+        "targets": [
+          {
+            "alias": "",
+            "format": "table",
+            "rawSql": "SELECT top 1 c.VersaoDb\r\nFROM\r\n  InformacoesCheck C\r\nJOIN \r\n  Sistema S on S.Handle = C.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = C.HandleAmbiente  \r\nWHERE\r\n  S.Nome = '$Sistema' \r\n  and A.Nome = '$Ambiente'\r\n  and C.Sucesso = 1\r\n  order by C.datahoraconsulta desc",
+            "refId": "A"
+          }
+        ],
+        "title": "Versão DB",
+        "type": "stat"
+      },
+      {
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 6,
+          "y": 0
+        },
+        "id": 6,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "/.*/",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "7.4.2",
+        "targets": [
+          {
+            "alias": "",
+            "format": "table",
+            "rawSql": "SELECT top 1 c.UltimaCorrecao\r\nFROM\r\n  InformacoesCheck C\r\nJOIN \r\n  Sistema S on S.Handle = C.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = C.HandleAmbiente  \r\nWHERE\r\n  S.Nome = '$Sistema' \r\n  and A.Nome = '$Ambiente'\r\n  and C.Sucesso = 1\r\n  order by C.datahoraconsulta desc",
+            "refId": "A"
+          }
+        ],
+        "title": "Última Correção",
+        "type": "stat"
+      },
+      {
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 9,
+          "y": 0
+        },
+        "id": 7,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "/.*/",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "7.4.2",
+        "targets": [
+          {
+            "alias": "",
+            "format": "table",
+            "rawSql": "SELECT top 1 c.UltimaAlteracao\r\nFROM\r\n  InformacoesCheck C\r\nJOIN \r\n  Sistema S on S.Handle = C.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = C.HandleAmbiente  \r\nWHERE\r\n  S.Nome = '$Sistema' \r\n  and A.Nome = '$Ambiente'\r\n  and C.Sucesso = 1\r\n  order by C.datahoraconsulta desc",
+            "refId": "A"
+          }
+        ],
+        "title": "Última Alteração",
+        "type": "stat"
+      },
+      {
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 12,
+          "y": 0
+        },
+        "id": 9,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "/.*/",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "7.4.2",
+        "targets": [
+          {
+            "alias": "",
+            "format": "table",
+            "rawSql": "SELECT top 1 c.UltimaEspecifica\r\nFROM\r\n  InformacoesCheck C\r\nJOIN \r\n  Sistema S on S.Handle = C.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = C.HandleAmbiente  \r\nWHERE\r\n  S.Nome = '$Sistema' \r\n  and A.Nome = '$Ambiente'\r\n  and C.Sucesso = 1\r\n  order by C.datahoraconsulta desc",
+            "refId": "A"
+          }
+        ],
+        "title": "Última Específica",
+        "type": "stat"
+      },
+      {
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": null,
+              "displayMode": "auto",
+              "filterable": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "DataHoraConsulta"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 180
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "NomeSistema"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 204
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "BServerHost"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 110
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "BServerSistema"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 188
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "CustomSystem"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 112
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "EncryptVDb"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 94
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "LastOficial"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 94
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "NomeDoSistema"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 133
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "UltimaAlteracao"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 117
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "UltimaAlteracaoEncrypt"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 166
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "UltimaCorrecao"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 113
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "UltimaEspecifica"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 120
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "UltimaParalela"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 122
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "UltimaParalelaEncrypt"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 156
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "VersaoDb"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 82
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "VersaoDoSistema"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 131
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 11,
+          "w": 24,
+          "x": 0,
+          "y": 4
+        },
+        "id": 2,
+        "options": {
+          "showHeader": true,
+          "sortBy": []
+        },
+        "pluginVersion": "7.4.2",
+        "targets": [
+          {
+            "alias": "",
+            "format": "table",
+            "rawSql": "SELECT c.DataHoraConsulta\r\n\t    ,c.NomeSistema    \r\n      ,c.BServerHost\r\n      ,c.BServerSistema\r\n      ,c.CustomSystem\r\n      ,c.EncryptVDb\r\n      ,c.LastOficial\r\n      ,c.NomeDoSistema\r\n      ,c.UltimaAlteracao\r\n      ,c.UltimaAlteracaoEncrypt\r\n      ,c.UltimaCorrecao\r\n      ,c.UltimaCorrecaoEncrypt\r\n      ,c.UltimaEspecifica\r\n      ,c.UltimaEspecificaEncrypt\r\n      ,c.UltimaParalela\r\n      ,c.UltimaParalelaEncrypt\r\n      ,c.VersaoDb\r\n      ,c.VersaoDoSistema\r\n      ,c.VerticalSystem\r\nFROM\r\n  InformacoesCheck C\r\nJOIN \r\n  Sistema S on S.Handle = C.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = C.HandleAmbiente  \r\nWHERE\r\n  C.DataHoraConsulta > (GETDATE()-90)\r\n  and S.Nome = '$Sistema' \r\n  and A.Nome = '$Ambiente'\r\n  and C.Sucesso = 1\r\norder by C.DataHoraConsulta desc  ",
+            "refId": "A"
+          }
+        ],
+        "title": "Atualizações últimos 90 dias",
+        "type": "table"
+      },
+      {
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": null,
+              "displayMode": "auto",
+              "filterable": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "DataHoraResposta"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 224
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "DataHoraRequisicao"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 210
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "DataHoraConsulta"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 209
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 11,
+          "w": 24,
+          "x": 0,
+          "y": 15
+        },
+        "id": 8,
+        "options": {
+          "showHeader": true,
+          "sortBy": []
+        },
+        "pluginVersion": "7.4.2",
+        "targets": [
+          {
+            "alias": "",
+            "format": "table",
+            "rawSql": "SELECT c.DataHoraConsulta\r\n\t    ,c.DataHoraRequisicao\r\n\t    ,c.DataHoraResposta\r\n\t    ,c.Mensagem\r\nFROM\r\n  InformacoesCheck C\r\nJOIN \r\n  Sistema S on S.Handle = C.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = C.HandleAmbiente  \r\nWHERE\r\n  C.DataHoraConsulta > (GETDATE()-90)\r\n  and S.Nome = '$Sistema' \r\n  and A.Nome = '$Ambiente'\r\n  and C.Sucesso <> 1\r\norder by C.DataHoraConsulta desc  ",
+            "refId": "A"
+          }
+        ],
+        "title": "Últimos Erros na Consulta de informações",
+        "type": "table"
+      }
+    ],
+    "schemaVersion": 27,
+    "style": "dark",
+    "tags": [
+      "informacoes"
+    ],
+    "templating": {
+      "list": [
+        {
+          "allValue": null,
+          "current": {
+            "selected": false,
+            "text": "Qualidade",
+            "value": "Qualidade"
+          },
+          "datasource": null,
+          "definition": "SELECT Nome FROM Ambiente",
+          "description": null,
+          "error": null,
+          "hide": 0,
+          "includeAll": false,
+          "label": null,
+          "multi": false,
+          "name": "Ambiente",
+          "options": [],
+          "query": "SELECT Nome FROM Ambiente",
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "tagValuesQuery": "",
+          "tags": [],
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        },
+        {
+          "allValue": null,
+          "current": {
+            "selected": false,
+            "text": "QUALIDADEAGHOM",
+            "value": "QUALIDADEAGHOM"
+          },
+          "datasource": null,
+          "definition": "SELECT S.NOME\nFROM SISTEMA S\nJOIN AMBIENTE A ON A.HANDLE  = S.HANDLEAMBIENTE\nWHERE A.NOME = '$Ambiente'",
+          "description": null,
+          "error": null,
+          "hide": 0,
+          "includeAll": false,
+          "label": null,
+          "multi": false,
+          "name": "Sistema",
+          "options": [],
+          "query": "SELECT S.NOME\nFROM SISTEMA S\nJOIN AMBIENTE A ON A.HANDLE  = S.HANDLEAMBIENTE\nWHERE A.NOME = '$Ambiente'",
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "tagValuesQuery": "",
+          "tags": [],
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        }
+      ]
+    },
+    "time": {
+      "from": "now-90d",
+      "to": "now"
+    },
+    "timepicker": {
+      "hidden": false,
+      "refresh_intervals": [
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ]
+    },
+    "timezone": "",
+    "title": "Informações por Sistema",
+    "uid": "c1cJDr_Gk",
+    "version": 8
+  }
