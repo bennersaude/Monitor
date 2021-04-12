@@ -1,0 +1,25 @@
+@model Monitor.Domain.ViewModels.Ambiente.DetalhesAmbienteViewModel
+
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<h1>Ambiente do Monitoramento</h1>
+
+<h3>Apagar</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Handle" />
+            Tem certeza que deseja excluir o ambiente @Model.Nome ?
+            <div class="form-group">
+                <input type="submit" value="Excluir" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar para a lista de ambientes</a>
+</div>

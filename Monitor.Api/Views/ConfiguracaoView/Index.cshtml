@@ -1,0 +1,41 @@
+@model Monitor.Domain.ViewModels.Configuracao.DetalhesConfiguracaoViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Configuração Geral do Monitoramento</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Handle)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Handle)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.IntervaloSegundosRecarregarAmbientes)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.IntervaloSegundosRecarregarAmbientes)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.CreateDateTime)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.CreateDateTime)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.UpdateDateTime)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.UpdateDateTime)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Handle">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

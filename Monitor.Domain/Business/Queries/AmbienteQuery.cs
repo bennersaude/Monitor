@@ -28,5 +28,14 @@ namespace Monitor.Domain.Business.Queries
                 return await Task.FromResult(mapper.Map<IEnumerable<DetalhesAmbienteViewModel>>(session.Query<Ambiente>()));
             }
         }
+
+        public async Task<DetalhesAmbienteViewModel> DetalhesAmbienteAsync(long handle)
+        {
+            using (var session = sessionProvider.OpenStatelessSession())
+            {
+                return await Task.FromResult(mapper.Map<DetalhesAmbienteViewModel>(session.Query<Ambiente>().Where(x => x.Handle == handle).FirstOrDefault()));
+            }
+        }
+        
     }
 }

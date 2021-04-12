@@ -1,0 +1,58 @@
+@model Monitor.Domain.ViewModels.Ambiente.DetalhesAmbienteViewModel
+
+@{
+    ViewData["Title"] = "Novo";
+}
+
+<h1>Ambiente do Monitoramento</h1>
+
+<h3>Novo</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IntervaloSegundosWebServiceChecks" class="control-label"></label>
+                <input asp-for="IntervaloSegundosWebServiceChecks" class="form-control" />
+                <span asp-validation-for="IntervaloSegundosWebServiceChecks" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MonitoramentoAtivo" class="control-label"></label>
+                <input asp-for="MonitoramentoAtivo" class="form-control" />
+                <span asp-validation-for="MonitoramentoAtivo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuantidadeChecagensConsiderarStatusWebService" class="control-label"></label>
+                <input asp-for="QuantidadeChecagensConsiderarStatusWebService" class="form-control" />
+                <span asp-validation-for="QuantidadeChecagensConsiderarStatusWebService" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuantidadeDiasExcluirDados" class="control-label"></label>
+                <input asp-for="QuantidadeDiasExcluirDados" class="form-control" />
+                <span asp-validation-for="QuantidadeDiasExcluirDados" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TimeoutMilissegundosWebServiceChecks" class="control-label"></label>
+                <input asp-for="TimeoutMilissegundosWebServiceChecks" class="form-control" />
+                <span asp-validation-for="TimeoutMilissegundosWebServiceChecks" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar para a lista de ambientes</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

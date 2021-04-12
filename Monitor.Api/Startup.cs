@@ -48,6 +48,10 @@ using Monitor.Data.Infra.Helpers;
 using Monitor.Api.Controllers;
 using Monitor.Api.HealthCheck;
 using Monitor.Api.Settings;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
+using Monitor.Api.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Monitor.Api
 {
@@ -72,6 +76,8 @@ namespace Monitor.Api
             }
         }
 
+        private string connectionString;
+
         private SessionProvider sessionProvider;
         public IServiceProvider serviceProvider { get; set; }
 
@@ -84,6 +90,12 @@ namespace Monitor.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            connectionString = Environment.GetEnvironmentVariable("BENNERMONITOR_CONNECTIONSTRING")
+                ?? Configuration.GetConnectionString("BennerMonitor");
+            if (String.IsNullOrEmpty(connectionString))
+                throw new ConfigurationErrorsException($"Não encontrada string de conexão 'BennerMonitor'!");
+
+            services.AddControllersWithViews();
             services.AddLogging(x => x.ClearProviders().AddLog4Net());
             ConfigureSignin(services);
             services.AddControllers(c => c.Filters.Add(typeof(ExceptionFilter)))
@@ -100,10 +112,7 @@ namespace Monitor.Api
                 if (!String.IsNullOrEmpty(Environment.GetEnvironmentVariable(PROXY_IP)))
                     options.KnownProxies.Add(IPAddress.Parse(Environment.GetEnvironmentVariable(PROXY_IP)));
             });
-            var connectionString = Environment.GetEnvironmentVariable("BENNERMONITOR_CONNECTIONSTRING")
-                ?? Configuration.GetConnectionString("BennerMonitor");
-            if (String.IsNullOrEmpty(connectionString))
-                throw new ConfigurationErrorsException($"Não encontrada string de conexão 'BennerMonitor'!");
+
             sessionProvider = new SessionProvider(TipoAplicacao.StandAlone,
                 connectionString,
                 assembliesWithMappingsPatterns: new[] { "Monitor.Data", "Monitor.Domain" },
@@ -146,6 +155,7 @@ namespace Monitor.Api
             });
 
             services.AddSingleton(automapperConfig.CreateMapper());
+            
         }
 
         private void ConfigureSignin(IServiceCollection services)
@@ -154,11 +164,52 @@ namespace Monitor.Api
             services.AddSingleton(signingConfigurations);
             var tokenConfigurations = GetTokenConfigurations();
             services.AddSingleton(tokenConfigurations);            
-            services.AddAuthentication(authOptions =>
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(connectionString));
+            services.AddDefaultIdentity<IdentityUser>(options => 
             {
-                authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(bearerOptions =>
+                options.SignIn.RequireConfirmedAccount = false;
+            })
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddRazorPages();
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings.
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 1;
+                options.Password.RequiredUniqueChars = 1;
+
+                // Lockout settings.
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
+
+                // User settings.
+                options.User.AllowedUserNameCharacters =
+                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                options.User.RequireUniqueEmail = false;
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+
+                options.LoginPath = "/Identity/Account/Login";
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.SlidingExpiration = true;
+            });
+
+            services.AddAuthentication(//authOptions =>
+            //{
+                //authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                //authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //}
+            ).AddJwtBearer(bearerOptions =>
             {
                 var paramsValidation = bearerOptions.TokenValidationParameters;
                 paramsValidation.IssuerSigningKey = signingConfigurations.Key;
@@ -288,18 +339,23 @@ namespace Monitor.Api
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", context =>
+                /*endpoints.MapGet("/", context =>
                 {
                     var prefix = String.IsNullOrEmpty(sitePrefix) ? String.Empty : $"/{sitePrefix}";
                     context.Response.Redirect($"{prefix}/swagger");
                     return context.Response.WriteAsync("ok");
-                });
+                });*/
                 /*endpoints.MapGet($"{BUILDVERSIONSTXT}", context =>
                 {
                     return context.Response.WriteAsync(informationalVersion);
                 });*/
-                endpoints.MapControllers();
+                //endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
+            
             app.UseCors(
                 options =>
                     {

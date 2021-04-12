@@ -1,0 +1,61 @@
+@model IEnumerable<Monitor.Domain.ViewModels.Ambiente.DetalhesAmbienteViewModel>
+
+@{
+    ViewData["Title"] = "Lista de Ambientes";
+}
+
+<h1>Ambientes do Monitoramento</h1>
+<hr />
+<p>
+    <a asp-action="Create">Adicionar Novo Ambiente</a>
+</p>
+<br>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Handle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonitoramentoAtivo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdateDateTime)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem  => item.Handle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem  => item.MonitoramentoAtivo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem  => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem  => item.CreateDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem  => item.UpdateDateTime)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Handle">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Handle">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Handle">Excluir</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
