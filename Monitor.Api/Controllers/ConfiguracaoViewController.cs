@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Monitor.Api.Config;
 using Monitor.Domain.Business.Commands.Configuracao;
 using Monitor.Domain.Business.Queries;
+using Monitor.Domain.ViewModels.Configuracao;
 
 namespace Monitor.Api.Controllers
 {
@@ -33,6 +34,41 @@ namespace Monitor.Api.Controllers
                 return NotFound();
 
             return View(configuracao);
+        }
+
+        [Route("/configuracaoview/edit/{id:long}")]
+        public async Task<IActionResult> Edit(long? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var configuracao = await configuracaoQuery.ObterConfiguracaoAsync();
+            if (configuracao == null)
+            {
+                return NotFound();
+            }
+            return View(configuracao);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("/configuracaoview/edit/{id:int}")]
+        public async Task<IActionResult> Edit(long? id, 
+          [Bind("IntervaloSegundosRecarregarAmbientes")] 
+          EditarConfiguracaoViewModel configuracao)
+        {
+
+            if (ModelState.IsValid)
+            {
+                await configuracaoCommandHandler.EditarAsync(mapper.Map<EditarConfiguracaoCommand>(configuracao));
+                
+                return RedirectToAction("Index");
+            }
+
+            return View(configuracao);
+            
         }
         
     }

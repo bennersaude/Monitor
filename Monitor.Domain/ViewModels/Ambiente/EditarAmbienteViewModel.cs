@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Monitor.Domain.ViewModels.Entidade;
 
-namespace Monitor.Domain.ViewModels
+namespace Monitor.Domain.ViewModels.Ambiente
 {
     public class EditarAmbienteViewModel : EntidadeViewModel
     {

@@ -1,0 +1,33 @@
+@model Monitor.Domain.ViewModels.Configuracao.DetalhesConfiguracaoViewModel
+
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<h1>Configuração do Monitoramento</h1>
+
+<h3>Editar</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IntervaloSegundosRecarregarAmbientes" class="control-label"></label>
+                <input asp-for="IntervaloSegundosRecarregarAmbientes" class="form-control" />
+                <span asp-validation-for="IntervaloSegundosRecarregarAmbientes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar para os detalhes da Configuração</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
