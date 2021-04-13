@@ -28,5 +28,22 @@ namespace Monitor.Domain.Business.Queries
                 return await Task.FromResult(mapper.Map<IEnumerable<DetalhesEndpointViewModel>>(session.Query<Endpoint>()));
             }
         }
+
+        public async Task<IEnumerable<DetalhesEndpointViewModel>> ListarEndpointsAsync(long handleSistema)
+        {
+            using (var session = sessionProvider.OpenStatelessSession())
+            {
+                return await Task.FromResult(mapper.Map<IEnumerable<DetalhesEndpointViewModel>>
+                  (session.Query<Endpoint>().Where(x => x.Sistema.Handle == handleSistema).ToList()));
+            }
+        }
+
+        public async Task<DetalhesEndpointViewModel> DetalhesEndpointAsync(long handle)
+        {
+            using (var session = sessionProvider.OpenStatelessSession())
+            {
+                return await Task.FromResult(mapper.Map<DetalhesEndpointViewModel>(session.Query<Endpoint>().Where(x => x.Handle == handle).FirstOrDefault()));
+            }
+        }
     }
 }

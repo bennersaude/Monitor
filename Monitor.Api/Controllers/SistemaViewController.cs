@@ -100,6 +100,8 @@ namespace Monitor.Api.Controllers
                 return RedirectToAction("Index", new {handleAmbiente = sistema.HandleAmbiente, nomeAmbiente = nomeAmbiente});
             }
 
+            ViewBag.handleAmbiente = sistema.HandleAmbiente;
+            ViewBag.nomeAmbiente = nomeAmbiente;
             return View(sistema);
             
         }
@@ -117,7 +119,7 @@ namespace Monitor.Api.Controllers
         [ValidateAntiForgeryToken]
         [Route("/sistemaview/create/{handleAmbiente:long}")]
         public async Task<IActionResult> Create(long? handleAmbiente, [FromForm] string nomeAmbiente,
-          [Bind("Handle,HandleAmbiente,Nome,Cliente,Cnpj,MonitoramentoAtivo,UrlConsultaProcessos,UrlConsultaInformacoes")] 
+          [Bind("HandleAmbiente,Nome,Cliente,Cnpj,MonitoramentoAtivo,UrlConsultaProcessos,UrlConsultaInformacoes")] 
           IncluirSistemaViewModel sistema)
         {
             if (ModelState.IsValid)
@@ -127,6 +129,8 @@ namespace Monitor.Api.Controllers
                 return RedirectToAction("Index",new {handleAmbiente=handleAmbiente, nomeAmbiente = nomeAmbiente});
             }
 
+            ViewBag.handleAmbiente = handleAmbiente;
+            ViewBag.nomeAmbiente = nomeAmbiente;
             return View(sistema);            
         }
 

@@ -1,0 +1,29 @@
+@model Monitor.Domain.ViewModels.Endpoint.DetalhesEndpointViewModel
+
+@{
+    ViewData["Title"] = "Excluir";
+}
+
+<h1>Sistema do Monitoramento</h1>
+
+<h3>Excluir</h3>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Handle" />
+            <input type="hidden" asp-for="HandleSistema" value="@ViewBag.handleSistema"/>
+            <input name="nomeSistema" class="form-control" value="@ViewBag.nomeSistema" type="hidden" readonly="true"/>
+            <br>
+            <h2>Tem certeza que deseja excluir o endpoint: @Model.Nome - @Model.Url?</h2>
+            <div class="form-group">
+                <input type="submit" value="Excluir" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div>
+    <a asp-action="Index" asp-route-handleSistema="@ViewBag.handleSistema" asp-route-nomeSistema="@ViewBag.nomeSistema">Voltar para a lista de Endpoints</a>
+</div>

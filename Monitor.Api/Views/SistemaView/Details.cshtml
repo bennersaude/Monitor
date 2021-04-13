@@ -72,6 +72,6 @@
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Handle" asp-route-handleAmbiente="@ViewBag.handleAmbiente" asp-route-nomeAmbiente="@ViewBag.nomeAmbiente">Editar</a> |
+    <a asp-controller="endpointview" asp-action="index" asp-route-handleSistema="@Model.Handle" asp-route-nomeSistema="@Model.Nome">Endpoints</a> |
     <a asp-action="Index" asp-route-handleAmbiente="@ViewBag.handleAmbiente" asp-route-nomeAmbiente="@ViewBag.nomeAmbiente">Voltar para a lista de sistemas</a>
 </div>
-

@@ -33,7 +33,6 @@ namespace Monitor.Domain.Business.Queries
         {
             using (var session = sessionProvider.OpenStatelessSession())
             {
-                //return await Task.FromResult(mapper.Map<IEnumerable<DetalhesSistemaViewModel>>(session.Query<Sistema>()));
                 return await Task.FromResult(mapper.Map<IEnumerable<DetalhesSistemaViewModel>>
                   (session.Query<Sistema>().Where(x => x.Ambiente.Handle == handleAmbiente).ToList()));
             }

@@ -12,6 +12,9 @@ namespace Monitor.Api.Filters
     {
         public void OnException(ExceptionContext context)
         {
+            if (!context.HttpContext.Request.Path.Value.Contains("/swagger"))
+                return;
+
             HttpStatusCode status = HttpStatusCode.InternalServerError;
             var message = context.Exception.Message;
 

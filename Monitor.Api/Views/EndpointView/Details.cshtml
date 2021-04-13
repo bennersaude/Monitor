@@ -1,0 +1,53 @@
+@model Monitor.Domain.ViewModels.Endpoint.DetalhesEndpointViewModel
+
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+<h1>Endpoint do Sistema do Monitoramento</h1>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-4">
+            <label class="control-label">Sistema</label>                
+        </dt>
+        <dd class="col-sm-8">
+            <label name="nomeSistema">@ViewBag.nomeSistema</label>
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Handle)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Handle)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Url)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Url)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.CreateDateTime)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.CreateDateTime)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.UpdateDateTime)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.UpdateDateTime)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Handle" asp-route-handleSistema="@ViewBag.handleSistema" asp-route-nomeSistema="@ViewBag.nomeSistema">Editar</a> |
+    <a asp-action="Index" asp-route-handleSistema="@ViewBag.handleSistema" asp-route-nomeSistema="@ViewBag.nomeSistema">Voltar para a lista de endpoints</a>
+</div>
+

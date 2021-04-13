@@ -1,0 +1,70 @@
+@model IEnumerable<Monitor.Domain.ViewModels.Endpoint.DetalhesEndpointViewModel>
+
+@{
+    ViewData["Title"] = "Lista de Sistemas";
+}
+
+<h1>Sistemas do Monitoramento</h1>
+<hr />
+<div class="form-group">
+    <label class="control-label">Sistema : @ViewBag.nomeSistema</label>
+</div>
+<p>
+    <a class="btn btn-primary" asp-action="Create" asp-route-handleSistema="@ViewBag.handleSistema" asp-route-nomeSistema="@ViewBag.nomeSistema">Adicionar Novo Endpoint</a>
+</p>
+<br>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Handle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdateDateTime)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem  => item.Handle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem  => item.Nome)
+            </td>
+            <td>
+                <span class="d-inline-block text-truncate" style="max-width: 300px;" title="@Html.DisplayFor(modelItem  => item.Url)">
+                @Html.DisplayFor(modelItem  => item.Url)
+                </span>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem  => item.CreateDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem  => item.UpdateDateTime)
+            </td>
+            <td>
+                <a class="px-1 py-0 m-0 btn btn-primary" asp-action="Edit" asp-route-id="@item.Handle" asp-route-handleSistema="@ViewBag.handleSistema" asp-route-nomeSistema="@ViewBag.nomeSistema">Editar</a> |
+                <a class="px-1 py-0 m-0 btn btn-primary" asp-action="Details" asp-route-id="@item.Handle" asp-route-handleSistema="@ViewBag.handleSistema" asp-route-nomeSistema="@ViewBag.nomeSistema">Detalhes</a> |
+                <a class="px-1 py-0 m-0 btn btn-primary" asp-action="Delete" asp-route-id="@item.Handle" asp-route-handleSistema="@ViewBag.handleSistema" asp-route-nomeSistema="@ViewBag.nomeSistema">Excluir</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<p>
+    <a class="btn btn-secondary" onclick="history.go(-1); return false;" href="#">Voltar</a><br />
+</p>
