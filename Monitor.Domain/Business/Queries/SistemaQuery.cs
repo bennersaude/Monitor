@@ -28,5 +28,24 @@ namespace Monitor.Domain.Business.Queries
                 return await Task.FromResult(mapper.Map<IEnumerable<DetalhesSistemaViewModel>>(session.Query<Sistema>()));
             }
         }
+
+        public async Task<IEnumerable<DetalhesSistemaViewModel>> ListarSistemasAsync(long handleAmbiente)
+        {
+            using (var session = sessionProvider.OpenStatelessSession())
+            {
+                //return await Task.FromResult(mapper.Map<IEnumerable<DetalhesSistemaViewModel>>(session.Query<Sistema>()));
+                return await Task.FromResult(mapper.Map<IEnumerable<DetalhesSistemaViewModel>>
+                  (session.Query<Sistema>().Where(x => x.Ambiente.Handle == handleAmbiente).ToList()));
+            }
+        }
+
+        public async Task<DetalhesSistemaViewModel> DetalhesSistemaAsync(long handle)
+        {
+            using (var session = sessionProvider.OpenStatelessSession())
+            {
+                return await Task.FromResult(mapper.Map<DetalhesSistemaViewModel>(session.Query<Sistema>().Where(x => x.Handle == handle).FirstOrDefault()));
+            }
+        }
+
     }
 }

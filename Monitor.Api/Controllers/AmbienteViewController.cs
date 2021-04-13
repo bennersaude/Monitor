@@ -70,7 +70,7 @@ namespace Monitor.Api.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("/ambienteview/edit/{id:int}")]
+        [Route("/ambienteview/edit/{id:long}")]
         public async Task<IActionResult> Edit(long? id, 
           [Bind("Handle,Nome,MonitoramentoAtivo,IntervaloSegundosWebServiceChecks, TimeoutMilissegundosWebServiceChecks,QuantidadeChecagensConsiderarStatusWebService,QuantidadeDiasExcluirDados")] 
           EditarAmbienteViewModel ambiente)
@@ -114,7 +114,7 @@ namespace Monitor.Api.Controllers
             return View(ambiente);            
         }
 
-        [Route("/ambienteview/delete/{id:int}")]
+        [Route("/ambienteview/delete/{id:long}")]
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
@@ -132,7 +132,7 @@ namespace Monitor.Api.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("/ambienteview/delete/{id:int}")]
+        [Route("/ambienteview/delete/{id:long}")]
         public async Task<IActionResult> DeleteConfirmed(long? id)
         {
             if (id == null)

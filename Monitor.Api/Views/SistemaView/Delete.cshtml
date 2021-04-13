@@ -1,0 +1,29 @@
+@model Monitor.Domain.ViewModels.Sistema.DetalhesSistemaViewModel
+
+@{
+    ViewData["Title"] = "Excluir";
+}
+
+<h1>Sistema do Monitoramento</h1>
+
+<h3>Excluir</h3>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Handle" />
+            <input type="hidden" asp-for="HandleAmbiente" value="@ViewBag.handleAmbiente"/>
+            <input name="nomeAmbiente" class="form-control" value="@ViewBag.nomeAmbiente" type="hidden" readonly="true"/>
+            <br>
+            <h2>Tem certeza que deseja excluir o sistema: @Model.Nome?</h2>
+            <div class="form-group">
+                <input type="submit" value="Excluir" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div>
+    <a asp-action="Index" asp-route-handleAmbiente="@ViewBag.handleAmbiente" asp-route-nomeAmbiente="@ViewBag.nomeAmbiente">Voltar para a lista de Sistemas</a>
+</div>

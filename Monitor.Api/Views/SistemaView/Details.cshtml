@@ -1,14 +1,19 @@
-@model Monitor.Domain.ViewModels.Ambiente.DetalhesAmbienteViewModel
+@model Monitor.Domain.ViewModels.Sistema.DetalhesSistemaViewModel
 
 @{
     ViewData["Title"] = "Detalhes";
 }
 
-<h1>Ambiente do Monitoramento</h1>
-
+<h1>Sistema do Monitoramento</h1>
 <div>
     <hr />
     <dl class="row">
+        <dt class="col-sm-4">
+            <label class="control-label">Ambiente</label>                
+        </dt>
+        <dd class="col-sm-8">
+            <label name="nomeAmbiente">@ViewBag.nomeAmbiente</label>
+        </dd>
         <dt class="col-sm-4">
             @Html.DisplayNameFor(model => model.Handle)
         </dt>
@@ -22,34 +27,34 @@
             @Html.DisplayFor(model => model.Nome)
         </dd>
         <dt class="col-sm-4">
-            @Html.DisplayNameFor(model => model.IntervaloSegundosWebServiceChecks)
+            @Html.DisplayNameFor(model => model.Cliente)
         </dt>
         <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.IntervaloSegundosWebServiceChecks)
+            @Html.DisplayFor(model => model.Cliente)
         </dd>
         <dt class="col-sm-4">
-            @Html.DisplayNameFor(model => model.QuantidadeChecagensConsiderarStatusWebService)
+            @Html.DisplayNameFor(model => model.Cnpj)
         </dt>
         <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.QuantidadeChecagensConsiderarStatusWebService)
-        </dd>
-        <dt class="col-sm-4">
-            @Html.DisplayNameFor(model => model.QuantidadeDiasExcluirDados)
-        </dt>
-        <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.QuantidadeDiasExcluirDados)
-        </dd>
-        <dt class="col-sm-4">
-            @Html.DisplayNameFor(model => model.TimeoutMilissegundosWebServiceChecks)
-        </dt>
-        <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.TimeoutMilissegundosWebServiceChecks)
+            @Html.DisplayFor(model => model.Cnpj)
         </dd>
         <dt class="col-sm-4">
             @Html.DisplayNameFor(model => model.MonitoramentoAtivo)
         </dt>
         <dd class="col-sm-8">
             @Html.DisplayFor(model => model.MonitoramentoAtivo)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.UrlConsultaProcessos)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.UrlConsultaProcessos)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.UrlConsultaInformacoes)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.UrlConsultaInformacoes)
         </dd>
         <dt class="col-sm-4">
             @Html.DisplayNameFor(model => model.CreateDateTime)
@@ -66,8 +71,7 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Handle">Editar</a> |
-    <a asp-controller="sistemaview" asp-action="index" asp-route-handleAmbiente="@Model.Handle" asp-route-nomeAmbiente="@Model.Nome">Sistemas</a> |
-    <a asp-action="Index">Voltar para a lista de ambientes</a>
+    <a asp-action="Edit" asp-route-id="@Model.Handle" asp-route-handleAmbiente="@ViewBag.handleAmbiente" asp-route-nomeAmbiente="@ViewBag.nomeAmbiente">Editar</a> |
+    <a asp-action="Index" asp-route-handleAmbiente="@ViewBag.handleAmbiente" asp-route-nomeAmbiente="@ViewBag.nomeAmbiente">Voltar para a lista de sistemas</a>
 </div>
 

@@ -6,11 +6,18 @@
 }
 
 <h1>Parametrização para Monitoramento</h1>
+<br>
+<hr>
+<br>
 
-<a class="nav-link text-dark" asp-area="" asp-controller="configuracaoview" asp-action="Index">Configuração</a>
-
-<a class="nav-link text-dark" asp-area="" asp-controller="ambienteview" asp-action="Index">Ambiente</a>
-
-<a class="nav-link text-dark" asp-area="" asp-controller="sistemaview" asp-action="Index">Sistemas</a>
-
-
+<ul class="nav">
+  <li class="nav-item">
+    <a class="rounded p-4 m-4 btn bg-secondary text-white" asp-area="" asp-controller="configuracaoview" asp-action="Index">Configuração</a>
+  </li>
+  <li class="nav-item">
+    <a class="rounded p-4 m-4 btn bg-secondary text-white" asp-area="" asp-controller="ambienteview" asp-action="Index">Ambientes</a>
+  </li>
+  <li class="nav-item">
+    <a class="rounded p-4 m-4 btn bg-secondary text-white" asp-area="" asp-controller="swagger" asp-action="Index">Swagger</a>
+  </li>
+</ul>

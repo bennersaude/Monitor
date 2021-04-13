@@ -1,0 +1,70 @@
+@model IEnumerable<Monitor.Domain.ViewModels.Sistema.DetalhesSistemaViewModel>
+
+@{
+    ViewData["Title"] = "Lista de Sistemas";
+}
+
+<h1>Sistemas do Monitoramento</h1>
+<hr />
+<div class="form-group">
+    <label class="control-label">Ambiente : @ViewBag.nomeAmbiente</label>
+</div>
+<p>
+    <a class="btn btn-primary" asp-action="Create" asp-route-handleAmbiente="@ViewBag.handleAmbiente" asp-route-nomeAmbiente="@ViewBag.nomeAmbiente">Adicionar Novo Sistema</a>
+</p>
+<br>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Handle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonitoramentoAtivo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdateDateTime)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem  => item.Handle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem  => item.MonitoramentoAtivo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem  => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem  => item.Cliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem  => item.CreateDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem  => item.UpdateDateTime)
+            </td>
+            <td>
+                <a class="px-1 py-0 m-0 btn btn-primary" asp-action="Edit" asp-route-id="@item.Handle" asp-route-handleAmbiente="@ViewBag.handleAmbiente" asp-route-nomeAmbiente="@ViewBag.nomeAmbiente">Editar</a> |
+                <a class="px-1 py-0 m-0 btn btn-primary" asp-action="Details" asp-route-id="@item.Handle" asp-route-handleAmbiente="@ViewBag.handleAmbiente" asp-route-nomeAmbiente="@ViewBag.nomeAmbiente">Detalhes</a> |
+                <a class="px-1 py-0 m-0 btn btn-primary" asp-action="Delete" asp-route-id="@item.Handle" asp-route-handleAmbiente="@ViewBag.handleAmbiente" asp-route-nomeAmbiente="@ViewBag.nomeAmbiente">Excluir</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

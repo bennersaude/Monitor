@@ -7,7 +7,7 @@
 <h1>Ambientes do Monitoramento</h1>
 <hr />
 <p>
-    <a asp-action="Create">Adicionar Novo Ambiente</a>
+    <a class="btn btn-primary" asp-action="Create">Adicionar Novo Ambiente</a>
 </p>
 <br>
 
@@ -51,9 +51,10 @@
                 @Html.DisplayFor(modelItem  => item.UpdateDateTime)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Handle">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.Handle">Detalhes</a> |
-                <a asp-action="Delete" asp-route-id="@item.Handle">Excluir</a>
+                <a class="px-1 py-0 m-0 btn btn-primary" asp-action="Edit" asp-route-id="@item.Handle">Editar</a> |
+                <a class="px-1 py-0 m-0 btn btn-primary" asp-action="Details" asp-route-id="@item.Handle">Detalhes</a> |
+                <a class="px-1 py-0 m-0 btn btn-primary" asp-action="Delete" asp-route-id="@item.Handle">Excluir</a> |
+                <a class="px-1 py-0 m-0 btn btn-secondary" asp-controller="sistemaview" asp-action="index" asp-route-handleAmbiente="@item.Handle" asp-route-nomeAmbiente="@item.Nome">Sistemas</a> |
             </td>
         </tr>
 }
