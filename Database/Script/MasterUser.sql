@@ -1,0 +1,32 @@
+INSERT INTO AspNetUsers
+           ([Id]
+           ,[UserName]
+           ,[NormalizedUserName]
+           ,[Email]
+           ,[NormalizedEmail]
+           ,[EmailConfirmed]
+           ,[PasswordHash]
+           ,[SecurityStamp]
+           ,[ConcurrencyStamp]
+           ,[PhoneNumber]
+           ,[PhoneNumberConfirmed]
+           ,[TwoFactorEnabled]
+           ,[LockoutEnd]
+           ,[LockoutEnabled]
+           ,[AccessFailedCount])
+     VALUES
+           ('57777531-f64b-4968-aad2-a097545aa5ee'
+           ,'admin@benner.com.br'
+           ,'ADMIN@BENNER.COM.BR'
+           ,'admin@benner.com.br'
+           ,'ADMIN@BENNER.COM.BR'
+           ,1
+           ,'AQAAAAEAACcQAAAAENc4kwOGa6Q1giF3NIb1tRrKgEPWjei3FJlHyL7lblR3g++SzoivCUHbnrW73ImPuQ==' --1q2w#E
+           ,'AF6BUZBVMN65GEMMGRITPAWCX3GLG3PS'
+           ,'51a0309d-48a8-41cb-8c77-9db100050f1b'
+           ,null
+           ,0
+           ,0
+           ,null
+           ,1
+           ,0)
