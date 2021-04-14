@@ -5,11 +5,17 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Parametrização para Monitoramento</h1>
 <br>
+<p class="h4">Esse módulo permite realizar as configurações e parametrizações necessárias para que o monitoramento de sistemas poss coletar as informações</p>
 <hr>
 <br>
-
+<p>Na opção de Configuração é possível informar em quantos segundos serão verificadas a inclusão e remoção de ambientes</p>
+<br>
+<p>Na opção de Ambientes é possível cadastrar os ambientes e parâmetros para o monitoramento</p>
+<br>
+<p>Na opção do Swagger é encaminhado para a Api que pode ser utilizada para a configuração e parametrização dos ambientes e sistemas</p>
+<br>
+<hr>
 <ul class="nav">
   <li class="nav-item">
     <a class="rounded p-4 m-4 btn bg-secondary text-white" asp-area="" asp-controller="configuracaoview" asp-action="Index">Configuração</a>
@@ -21,3 +27,9 @@
     <a class="rounded p-4 m-4 btn bg-secondary text-white" asp-area="" asp-controller="swagger" asp-action="Index">Swagger</a>
   </li>
 </ul>
+<hr>
+<br>
+<p>O acesso so painel de monitoramento do Grafana pode ser feito por <a href="http://mga-randrade:3100/" target="_blank">aqui</a></p>
+<p>No grafana os dados parace acesso somente de visualização é usuário: benner senha: benner</a></p>
+
+<br>
