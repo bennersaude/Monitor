@@ -6,6 +6,9 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Novo Usuário</a>
+    </li>
+    <li class="nav-item">
         <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Olá @User.Identity.Name!</a>
     </li>
     <li class="nav-item">
@@ -16,9 +19,6 @@
 }
 else
 {
-    <!--<li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Registrar</a>
-    </li>-->
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
     </li>

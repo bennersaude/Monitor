@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 4,
-  "iteration": 1617889348764,
+  "iteration": 1618416983396,
   "links": [],
   "panels": [
     {
@@ -454,15 +454,57 @@
       }
     },
     {
-      "columns": [],
       "datasource": null,
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "right",
+            "filterable": false
+          },
+          "decimals": 2,
+          "displayName": "",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Time"
+              },
+              {
+                "id": "unit",
+                "value": "time: YYYY-MM-DD HH:mm:ss"
+              },
+              {
+                "id": "custom.align",
+                "value": null
+              }
+            ]
+          }
+        ]
       },
-      "fontSize": "100%",
       "gridPos": {
         "h": 7,
         "w": 24,
@@ -470,62 +512,83 @@
         "y": 23
       },
       "id": 13,
-      "pageSize": null,
-      "showHeader": true,
-      "sort": {
-        "col": 0,
-        "desc": false
+      "options": {
+        "showHeader": true
       },
-      "styles": [
-        {
-          "$$hashKey": "object:1787",
-          "alias": "Time",
-          "align": "auto",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "date"
-        },
-        {
-          "$$hashKey": "object:1788",
-          "alias": "",
-          "align": "right",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        }
-      ],
+      "pluginVersion": "7.4.2",
       "targets": [
         {
           "alias": "",
           "format": "table",
-          "rawSql": "SELECT distinct\r\n  C.NomeServicoIntegracao Servico,\r\n  C.Url,\r\n  C.TipoExcecao,\r\n  count(1) AS Qtd\r\nFROM\r\n  WebServiceCheck C\r\nJOIN \r\n  Sistema S on S.Handle = C.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = C.HandleAmbiente  \r\nWHERE\r\n  $__timeFilter(C.DataHoraBateriaTestes) \r\n  and S.Nome = '$Sistema' \r\n  and A.Nome = '$Ambiente'\r\n  and C.NomeServicoIntegracao is not null\r\n  and c.TipoExcecao is not null\r\ngroup by C.NomeServicoIntegracao,\r\n  C.Url,\r\n  C.TipoExcecao\r\norder by C.NomeServicoIntegracao  ",
+          "rawSql": "SELECT distinct\r\n  C.NomeServicoIntegracao Servico,\r\n  C.Url,\r\n  C.TipoExcecao,\r\n  c.DetalhesExcecao,\r\n  count(1) AS Qtd\r\nFROM\r\n  WebServiceCheck C\r\nJOIN \r\n  Sistema S on S.Handle = C.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = C.HandleAmbiente  \r\nWHERE\r\n  $__timeFilter(C.DataHoraBateriaTestes) \r\n  and S.Nome = '$Sistema' \r\n  and A.Nome = '$Ambiente'\r\n  and C.NomeServicoIntegracao is not null\r\n  and c.TipoExcecao is not null\r\ngroup by C.NomeServicoIntegracao,\r\n  C.Url,\r\n  C.TipoExcecao,\r\n  c.DetalhesExcecao\r\norder by C.NomeServicoIntegracao  ",
           "refId": "A"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
       "title": "Exceções Ocorridas",
-      "transform": "table",
-      "type": "table-old"
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {
+            "reducers": []
+          }
+        }
+      ],
+      "type": "table"
     },
     {
-      "columns": [],
       "datasource": null,
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "right",
+            "filterable": false
+          },
+          "decimals": 2,
+          "displayName": "",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Time"
+              },
+              {
+                "id": "unit",
+                "value": "time: YYYY-MM-DD HH:mm:ss"
+              },
+              {
+                "id": "custom.align",
+                "value": null
+              }
+            ]
+          }
+        ]
       },
-      "fontSize": "90%",
       "gridPos": {
         "h": 11,
         "w": 24,
@@ -533,38 +596,10 @@
         "y": 30
       },
       "id": 11,
-      "pageSize": null,
-      "showHeader": true,
-      "sort": {
-        "col": 0,
-        "desc": false
+      "options": {
+        "showHeader": true
       },
-      "styles": [
-        {
-          "$$hashKey": "object:1150",
-          "alias": "Time",
-          "align": "auto",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "date"
-        },
-        {
-          "$$hashKey": "object:1151",
-          "alias": "",
-          "align": "right",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        }
-      ],
+      "pluginVersion": "7.4.2",
       "targets": [
         {
           "alias": "",
@@ -576,8 +611,15 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "URL dos Serviços",
-      "transform": "table",
-      "type": "table-old"
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {
+            "reducers": []
+          }
+        }
+      ],
+      "type": "table"
     }
   ],
   "refresh": "1m",
@@ -667,5 +709,5 @@
   "timezone": "",
   "title": "Disponibilidade por Sistema",
   "uid": "93VQ81qZk",
-  "version": 3
+  "version": 5
 }

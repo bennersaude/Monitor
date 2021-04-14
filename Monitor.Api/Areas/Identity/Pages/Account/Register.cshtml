@@ -1,11 +1,52 @@
 @page
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
 @model RegisterModel
 @{
-    ViewData["Title"] = "Ir para Login";
+    ViewData["Title"] = "Criar Novo usuário";
 }
 
 <h1>@ViewData["Title"]</h1>
 
-<li class="nav-item">
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <h4>Criar Nova Conta.</h4>
+                <hr />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Input.Email"></label>
+                    <input asp-for="Input.Email" class="form-control" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Password"></label>
+                    <input asp-for="Input.Password" class="form-control" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.ConfirmPassword"></label>
+                    <input asp-for="Input.ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Criar</button>
+            </form>
+        </div>
+    </div>
+
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+else
+{
+    <br>
+    <p>Para registrar um novo usuário você deve estar logado, somente quem tem acesso pode cadastrar novos usuários</p>
+    <br>
     <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-</li>
+    
+}
