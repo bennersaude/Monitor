@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 5,
-  "iteration": 1618417055948,
+  "iteration": 1618425696321,
   "links": [],
   "panels": [
     {
@@ -308,7 +308,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "Qualidade",
           "value": "Qualidade"
         },
@@ -349,20 +349,9 @@
         "label": null,
         "multi": false,
         "name": "Sistema",
-        "options": [
-          {
-            "selected": true,
-            "text": "QUALIDADEAGCORRENTE",
-            "value": "QUALIDADEAGCORRENTE"
-          },
-          {
-            "selected": false,
-            "text": "QUALIDADEAGHOM",
-            "value": "QUALIDADEAGHOM"
-          }
-        ],
+        "options": [],
         "query": "SELECT S.NOME\nFROM SISTEMA S\nJOIN AMBIENTE A ON A.HANDLE  = S.HANDLEAMBIENTE\nWHERE A.NOME = '$Ambiente'",
-        "refresh": 0,
+        "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 1,
@@ -382,5 +371,5 @@
   "timezone": "",
   "title": "Processos por Sistema",
   "uid": "7Y-qyQlMk",
-  "version": 21
+  "version": 23
 }
