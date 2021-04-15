@@ -291,7 +291,11 @@
         "message": "Existem serviços indisponíveis",
         "name": "Serviços com Falha",
         "noDataState": "alerting",
-        "notifications": []
+        "notifications": [
+          {
+            "uid": "kwQbnwlMz"
+          }
+        ]
       },
       "aliasColors": {},
       "bars": false,
@@ -469,5 +473,5 @@
   "timezone": "",
   "title": "Disponibilidade Geral",
   "uid": "djUbPDlGa",
-  "version": 8
+  "version": 9
 }
