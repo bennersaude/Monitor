@@ -1,1 +1,1 @@
-docker run -d --volume "E:\Docker\dataGrafanaBenner:/var/lib/grafana" -p 3100:3000 --name grafanaBennerLocal grafana/grafana
+docker run -d --volume "E:\Docker\dataGrafanaBenner:/var/lib/grafana" -p 3100:3000 -e "GF_SMTP_ENABLED=true" -e "GF_SMTP_HOST=smtp.gmail.com:587" -e "GF_SMTP_USER=hospitalar.benner@gmail.com" -e "GF_SMTP_PASSWORD=benner@123" -e "GF_FROM_ADDRESS=hospitalar.benner@gmail.com" --name grafanaBennerLocal grafana/grafana
