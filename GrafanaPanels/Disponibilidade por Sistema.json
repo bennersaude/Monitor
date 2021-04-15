@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 4,
-  "iteration": 1618416983396,
+  "iteration": 1618487880320,
   "links": [],
   "panels": [
     {
@@ -224,6 +224,111 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "hiddenSeries": false,
+      "hideTimeOverride": false,
+      "id": 14,
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.2",
+      "pointradius": 2,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:295"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "",
+          "format": "time_series",
+          "rawSql": "SELECT\n  $__timeEpoch(H.DataHoraStatus),\n  H.TempoMediaResposta as value,\n  H.NOMESERVICOINTEGRACAO as metric\nFROM\n  WebServiceHealth H\nJOIN \n  Sistema S on S.Handle = H.HandleSistema\nJOIN\n  Ambiente A on A.Handle = H.HandleAmbiente\nWHERE\n  $__timeFilter(H.DataHoraStatus) \n  and S.Nome = '$Sistema' \n  and A.Nome = '$Ambiente'\n  and H.Url is not null\n  and H.TempoMediaResposta is not null\nORDER BY\n  H.DataHoraStatus ASC",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Tempo Resposta do Ping por Servço",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:216",
+          "decimals": 0,
+          "format": "short",
+          "label": "Milissegundos",
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:217",
+          "format": "dtdurationms",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "custom": {},
@@ -237,7 +342,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 16
+        "y": 23
       },
       "hiddenSeries": false,
       "id": 6,
@@ -368,7 +473,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 16
+        "y": 23
       },
       "hiddenSeries": false,
       "hideTimeOverride": false,
@@ -509,7 +614,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 23
+        "y": 30
       },
       "id": 13,
       "options": {
@@ -593,7 +698,7 @@
         "h": 11,
         "w": 24,
         "x": 0,
-        "y": 30
+        "y": 37
       },
       "id": 11,
       "options": {
@@ -662,8 +767,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "Assefaz - AG",
-          "value": "Assefaz - AG"
+          "text": "Postal - AG",
+          "value": "Postal - AG"
         },
         "datasource": null,
         "definition": "SELECT S.NOME\nFROM SISTEMA S\nJOIN AMBIENTE A ON A.HANDLE  = S.HANDLEAMBIENTE\nWHERE A.NOME = '$Ambiente'",
@@ -709,5 +814,5 @@
   "timezone": "",
   "title": "Disponibilidade por Sistema",
   "uid": "93VQ81qZk",
-  "version": 5
+  "version": 7
 }
