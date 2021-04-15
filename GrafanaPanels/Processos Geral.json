@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 6,
-  "iteration": 1618417027547,
+  "iteration": 1618425661558,
   "links": [],
   "panels": [
     {
@@ -168,13 +168,331 @@
       "points": false,
       "renderer": "flot",
       "repeatDirection": "h",
-      "repeatIteration": 1618417027547,
+      "repeatIteration": 1618425661558,
       "repeatPanelId": 2,
       "scopedVars": {
         "Sistema": {
           "selected": true,
           "text": "QUALIDADEAGHOM",
           "value": "QUALIDADEAGHOM"
+        }
+      },
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "",
+          "format": "time_series",
+          "rawSql": "SELECT\r\n  $__timeEpoch(H.DataHoraConsulta),\r\n  H.FinalizadosSucesso,\r\n  H.FinalizadosErro,\r\n  ProcessosPendentes,\r\n  ProcessosExecutando\r\nFROM\r\n  ProcessosCheck H\r\nJOIN \r\n  Sistema S on S.Handle = H.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = H.HandleAmbiente\r\nWHERE\r\n  $__timeFilter(H.DataHoraConsulta) \r\n  and S.Nome in ($Sistema)\r\n  and Sucesso = 1\r\nORDER BY\r\n  H.DataHoraConsulta ASC",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Processos $Sistema",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "hiddenSeries": false,
+      "id": 4,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "maxPerRow": 2,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.2",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatDirection": "h",
+      "repeatIteration": 1618425661558,
+      "repeatPanelId": 2,
+      "scopedVars": {
+        "Sistema": {
+          "selected": true,
+          "text": "FachesfTre",
+          "value": "FachesfTre"
+        }
+      },
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "",
+          "format": "time_series",
+          "rawSql": "SELECT\r\n  $__timeEpoch(H.DataHoraConsulta),\r\n  H.FinalizadosSucesso,\r\n  H.FinalizadosErro,\r\n  ProcessosPendentes,\r\n  ProcessosExecutando\r\nFROM\r\n  ProcessosCheck H\r\nJOIN \r\n  Sistema S on S.Handle = H.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = H.HandleAmbiente\r\nWHERE\r\n  $__timeFilter(H.DataHoraConsulta) \r\n  and S.Nome in ($Sistema)\r\n  and Sucesso = 1\r\nORDER BY\r\n  H.DataHoraConsulta ASC",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Processos $Sistema",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "hiddenSeries": false,
+      "id": 5,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "maxPerRow": 2,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.2",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatDirection": "h",
+      "repeatIteration": 1618425661558,
+      "repeatPanelId": 2,
+      "scopedVars": {
+        "Sistema": {
+          "selected": true,
+          "text": "EconomusHom",
+          "value": "EconomusHom"
+        }
+      },
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "",
+          "format": "time_series",
+          "rawSql": "SELECT\r\n  $__timeEpoch(H.DataHoraConsulta),\r\n  H.FinalizadosSucesso,\r\n  H.FinalizadosErro,\r\n  ProcessosPendentes,\r\n  ProcessosExecutando\r\nFROM\r\n  ProcessosCheck H\r\nJOIN \r\n  Sistema S on S.Handle = H.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = H.HandleAmbiente\r\nWHERE\r\n  $__timeFilter(H.DataHoraConsulta) \r\n  and S.Nome in ($Sistema)\r\n  and Sucesso = 1\r\nORDER BY\r\n  H.DataHoraConsulta ASC",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Processos $Sistema",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 16
+      },
+      "hiddenSeries": false,
+      "id": 6,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "maxPerRow": 2,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.2",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatDirection": "h",
+      "repeatIteration": 1618425661558,
+      "repeatPanelId": 2,
+      "scopedVars": {
+        "Sistema": {
+          "selected": true,
+          "text": "MetrusHom",
+          "value": "MetrusHom"
         }
       },
       "seriesOverrides": [],
@@ -245,11 +563,17 @@
           "tags": [],
           "text": [
             "QUALIDADEAGCORRENTE",
-            "QUALIDADEAGHOM"
+            "QUALIDADEAGHOM",
+            "FachesfTre",
+            "EconomusHom",
+            "MetrusHom"
           ],
           "value": [
             "QUALIDADEAGCORRENTE",
-            "QUALIDADEAGHOM"
+            "QUALIDADEAGHOM",
+            "FachesfTre",
+            "EconomusHom",
+            "MetrusHom"
           ]
         },
         "datasource": null,
@@ -261,20 +585,9 @@
         "label": null,
         "multi": true,
         "name": "Sistema",
-        "options": [
-          {
-            "selected": true,
-            "text": "QUALIDADEAGCORRENTE",
-            "value": "QUALIDADEAGCORRENTE"
-          },
-          {
-            "selected": true,
-            "text": "QUALIDADEAGHOM",
-            "value": "QUALIDADEAGHOM"
-          }
-        ],
+        "options": [],
         "query": "select nome from sistema where UrlConsultaProcessos is not null",
-        "refresh": 0,
+        "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
@@ -294,5 +607,5 @@
   "timezone": "",
   "title": "Processos Geral",
   "uid": "1Ah8JX_Gk",
-  "version": 11
+  "version": 13
 }

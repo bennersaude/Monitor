@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 7,
-  "iteration": 1618417042290,
+  "iteration": 1618425595134,
   "links": [],
   "panels": [
     {
@@ -168,7 +168,7 @@
       "points": false,
       "renderer": "flot",
       "repeatDirection": "h",
-      "repeatIteration": 1618417042290,
+      "repeatIteration": 1618425595134,
       "repeatPanelId": 2,
       "scopedVars": {
         "Sistema": {
@@ -241,7 +241,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "Qualidade",
           "value": "Qualidade"
         },
@@ -254,15 +254,9 @@
         "label": null,
         "multi": false,
         "name": "Ambiente",
-        "options": [
-          {
-            "selected": true,
-            "text": "Qualidade",
-            "value": "Qualidade"
-          }
-        ],
+        "options": [],
         "query": "SELECT a.Nome \n  FROM Ambiente a \n  join sistema s on s.handleambiente = a.handle\nwhere s.UrlConsultaProcessos is not null",
-        "refresh": 0,
+        "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
@@ -287,7 +281,7 @@
           ]
         },
         "datasource": null,
-        "definition": "select nome from sistema where UrlConsultaProcessos is not null",
+        "definition": "SELECT S.NOME\nFROM SISTEMA S\nJOIN AMBIENTE A ON A.HANDLE  = S.HANDLEAMBIENTE\nWHERE A.NOME = '$Ambiente'\n  and  S.UrlConsultaProcessos is not null",
         "description": null,
         "error": null,
         "hide": 0,
@@ -295,20 +289,9 @@
         "label": null,
         "multi": true,
         "name": "Sistema",
-        "options": [
-          {
-            "selected": true,
-            "text": "QUALIDADEAGCORRENTE",
-            "value": "QUALIDADEAGCORRENTE"
-          },
-          {
-            "selected": true,
-            "text": "QUALIDADEAGHOM",
-            "value": "QUALIDADEAGHOM"
-          }
-        ],
-        "query": "select nome from sistema where UrlConsultaProcessos is not null",
-        "refresh": 0,
+        "options": [],
+        "query": "SELECT S.NOME\nFROM SISTEMA S\nJOIN AMBIENTE A ON A.HANDLE  = S.HANDLEAMBIENTE\nWHERE A.NOME = '$Ambiente'\n  and  S.UrlConsultaProcessos is not null",
+        "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
@@ -328,5 +311,5 @@
   "timezone": "",
   "title": "Processos por Ambiente",
   "uid": "bSlh-u_Mz",
-  "version": 4
+  "version": 7
 }
