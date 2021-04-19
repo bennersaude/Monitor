@@ -29,24 +29,10 @@ namespace Monitor.Console
             sessionProvider.UpdateSchema();
             SetFirstTimeConfiguration(sessionProvider);
             using (var scope = serviceProvider.CreateScope())
-                    {
-                        var jobsExecuter = scope.ServiceProvider.GetService<IJobsExecuter>();
-                        jobsExecuter.Execute();
-                    }
-
-            /*Parser.Default.ParseArguments<Options>(args)
-                .WithParsed<Options>(o =>
-                {
-                    //StartUp();
-                    //sessionProvider.UpdateSchema();
-                    //SetFirstTimeConfiguration(sessionProvider);
-                    using (var scope = serviceProvider.CreateScope())
-                    {
-                        var jobsExecuter = scope.ServiceProvider.GetService<IJobsExecuter>();
-                        jobsExecuter.Execute();
-                    }
-
-                });*/
+            {
+                var jobsExecuter = scope.ServiceProvider.GetService<IJobsExecuter>();
+                jobsExecuter.Execute();
+            }
         }
 
         private static void SetFirstTimeConfiguration(ISessionProvider sessionProvider)

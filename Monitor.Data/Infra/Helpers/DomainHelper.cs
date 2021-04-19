@@ -31,14 +31,6 @@ namespace Monitor.Data.Infra.Helpers
             return AppDomain.CurrentDomain.Load(name);
         }
 
-        /*public static IEnumerable<Type> GetSubtypesOf<T>()
-        {
-            var list = new List<Type>();
-            foreach (var assembly in GetLoadedBennerAssembly())
-                list.AddRange(assembly.GetTypes().Where(x => x.IsClassOrSubclassOf<T>() && !x.IsAbstract));
-            return list;
-        }*/
-
         private static IEnumerable<Assembly> GetLoadedBennerAssembly()
         {
             return

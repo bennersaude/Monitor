@@ -27,9 +27,6 @@ namespace Monitor.Data.NHibernate.Conventions
                 return;
 
             var length = ConfigureLength(instance);
-            /*var typeHelper = (new DataBaseHelper().DiscoverDataBaseType() == DataBaseType.Oracle)
-                    ? new OracleTypeHelper() as IDbTypeHelper
-                    : new SqlServerTypeHelper() as IDbTypeHelper;*/
             var typeHelper = new SqlServerTypeHelper() as IDbTypeHelper;
             instance.CustomSqlType(typeHelper.FromDotNetTypeToDLL(instance.Property.PropertyType, length));
         }
@@ -66,9 +63,6 @@ namespace Monitor.Data.NHibernate.Conventions
 
         public void Apply(IIdentityInstance instance)
         {
-            /*var typeHelper = (new DataBaseHelper().DiscoverDataBaseType() == DataBaseType.Oracle)
-                    ? new OracleTypeHelper() as IDbTypeHelper
-                    : new SqlServerTypeHelper() as IDbTypeHelper;*/
             var typeHelper = new SqlServerTypeHelper() as IDbTypeHelper;
             instance.CustomSqlType(typeHelper.FromDotNetTypeToDLL(instance.Type.GetUnderlyingSystemType(), 0));
         }

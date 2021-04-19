@@ -24,18 +24,15 @@ namespace Monitor.Domain.Business.Jobs
         private const int QTD_DIAS_INTERVALO_EXCLUSAO = 1;
         private readonly ISessionProvider sessionProvider;
         private readonly IMapper mapper;
-        //private readonly IOperadorasLoader operadorasLoader;
         private readonly Dictionary<Ambiente, CancellationTokenSource> jobsCancellationTokens = new Dictionary<Ambiente, CancellationTokenSource>();
         private readonly Dictionary<Ambiente, IEnumerable<IMonitorJob>> jobs = new Dictionary<Ambiente, IEnumerable<IMonitorJob>>();
         private readonly Dictionary<long, Ambiente> ambientesDict = new Dictionary<long, Ambiente>();
 
         public JobsExecuter(ISessionProvider sessionProvider,
             IMapper mapper)
-            //IOperadorasLoader operadorasLoader)
         {
             this.sessionProvider = sessionProvider;
             this.mapper = mapper;
-            //this.operadorasLoader = operadorasLoader;
         }
 
         public void Execute()
@@ -54,8 +51,6 @@ namespace Monitor.Domain.Business.Jobs
                     {
                         logger.Info("Não existem ambientes cadastrados. Nada será monitorado.");
                     }
-                    //operadorasLoader.SincronizarOperadoras(ambientes, session);
-                    //ForcarCarregamentoSistemas(ambientes);
                     ExcluirDadosAntigos(ambientes, session);
                     session.GetCurrentTransaction().Commit();
                 }
@@ -84,19 +79,13 @@ namespace Monitor.Domain.Business.Jobs
 
         private static void ForcarCarregamentoSistemas(IEnumerable<Ambiente> ambientes)
         {
-            /*foreach (var ambiente in ambientes)
-            {
-                ambiente.Sistemas.ToArray();
-            }*/
             ambientes.ToArray();
         }
 
         private void AtualizarConfiguracoesAmbientes(IEnumerable<Ambiente> ambientes)
         {
-            //foreach (var ambiente in ambientes.Where(x => x.DbConnectionException == null))
             foreach (var ambiente in ambientes)
             {
-                //if (ambientesDict[ambiente.Handle].DbConnectionString == ambiente.DbConnectionString)
                 if (ambientesDict[ambiente.Handle].Nome == ambiente.Nome)
                 {
                     ambientesDict[ambiente.Handle].CopiarConfiguracoes(ambiente);
@@ -117,7 +106,6 @@ namespace Monitor.Domain.Business.Jobs
         {
             foreach (var ambiente in jobs.Keys)
             {
-                //if (!ambientes.Where(x => x.DbConnectionException == null).Any(x => x.Equals(ambiente)))
                 if (!ambientes.Any(x => x.Equals(ambiente)))
                 {
                     EncerrarJobsParaAmbiente(ambiente);
@@ -136,7 +124,6 @@ namespace Monitor.Domain.Business.Jobs
 
         private void AdicionarJobsParaNovosAmbientes(IEnumerable<Ambiente> ambientes)
         {
-            //foreach (var ambiente in ambientes.Where(x => x.DbConnectionException == null))
             foreach (var ambiente in ambientes)
             {
                 if (!jobs.ContainsKey(ambiente))

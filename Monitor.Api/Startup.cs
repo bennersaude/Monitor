@@ -242,8 +242,8 @@ namespace Monitor.Api
         private TokenConfigurations GetTokenConfigurations()
         {
             var tokenConfigurations = new TokenConfigurations();
-            tokenConfigurations.Audience = Environment.GetEnvironmentVariable("API_AUDIENCE") ?? "ConectaMonitorAudience";
-            tokenConfigurations.Issuer = Environment.GetEnvironmentVariable("API_ISSUER") ?? "ConectaMonitorIssuer";
+            tokenConfigurations.Audience = Environment.GetEnvironmentVariable("API_AUDIENCE") ?? "MonitorAudience";
+            tokenConfigurations.Issuer = Environment.GetEnvironmentVariable("API_ISSUER") ?? "MonitorIssuer";
             tokenConfigurations.SecondsToExpire = int.Parse(Environment.GetEnvironmentVariable("JWT_TOKEN_SECONDSTOEXPIRE") ?? "3600");
             return tokenConfigurations;
         }

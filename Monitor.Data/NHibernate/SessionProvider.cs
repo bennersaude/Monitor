@@ -51,7 +51,7 @@ namespace Monitor.Data
             }
         }
 
-        public DataBaseType DataBaseType => DataBaseType.SQLServer; //new DataBaseHelper().DiscoverDataBaseType();
+        public DataBaseType DataBaseType => DataBaseType.SQLServer;
 
         public IEnumerable<string> TableNames;
         private global::NHibernate.Cfg.Configuration hibernateConfiguration;

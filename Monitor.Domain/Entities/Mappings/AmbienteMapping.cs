@@ -17,10 +17,8 @@ namespace Monitor.Domain.Entities.Mappings
             Map(x => x.IntervaloSegundosWebServiceChecks, "WSSEGUNDOSESPERA").Default("60");
             Map(x => x.TimeoutMilissegundosWebServiceChecks, "WSTIMEOUTMS").Default("5000");
             Map(x => x.QuantidadeChecagensConsiderarStatusWebService, "QTDCHECAGENSSTATUSWS").Default("3");;
-            Map(x => x.QuantidadeDiasExcluirDados, "QTDDIASEXCLUIRDADOS").Default("90");
-            //Map(x => x.AtivarParalelismoWebServicesOperadora, "WSATIVARPARALELISMO");            
+            Map(x => x.QuantidadeDiasExcluirDados, "QTDDIASEXCLUIRDADOS").Default("90");         
             Map(x => x.UltimaExclusaoDados);
-            //Map(x => x.DiferencaHorasUtc).Default("-3");
         }
     }
 }
