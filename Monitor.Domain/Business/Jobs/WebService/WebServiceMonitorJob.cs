@@ -188,14 +188,14 @@ namespace Monitor.Domain.Business.Jobs.WebService
             return excecao?.GetType().FullName.ToLower().Contains(TIMEOUT) == true;
         }
 
-        public static void ExcluirDadosAntigos(DateTime dataCorte, ISession session)
+        public static void ExcluirDadosAntigos(long handleAmbiente, DateTime dataCorte, ISession session)
         {
             session.Query<WebServiceCheck>()
-                .Where(c => c.DataHoraBateriaTestes <= dataCorte)
+                .Where(c => c.HandleAmbiente == handleAmbiente && c.DataHoraBateriaTestes <= dataCorte)
                 .Delete();
 
             session.Query<WebServiceHealth>()
-                .Where(c => c.DataHoraStatus <= dataCorte)
+                .Where(c => c.HandleAmbiente == handleAmbiente && c.DataHoraStatus <= dataCorte)
                 .Delete();
         }
     }

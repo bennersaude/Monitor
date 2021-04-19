@@ -74,9 +74,9 @@ namespace Monitor.Domain.Business.Jobs
                 {
                     logger.Info($"Excluindo dados antigos de monitoramento para ambiente {ambiente.Nome}");
                     var dataCorte = DateTime.UtcNow.AddDays(-ambiente.QuantidadeDiasExcluirDados);
-                    /*WebServiceMonitorJob.ExcluirDadosAntigos(dataCorte, session);
-                    MonitorTransacoesJob.ExcluirDadosAntigos(dataCorte, session);
-                    MonitorCacheJob.ExcluirDadosAntigos(dataCorte, session);*/
+                    WebServiceMonitorJob.ExcluirDadosAntigos(ambiente.Handle, dataCorte, session);
+                    ProcessosJob.ExcluirDadosAntigos(ambiente.Handle, dataCorte, session);
+                    InformacoesJob.ExcluirDadosAntigos(ambiente.Handle, dataCorte, session);
                     ambiente.UltimaExclusaoDados = DateTime.UtcNow;
                 }
             }

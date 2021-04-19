@@ -83,5 +83,12 @@ namespace Monitor.Domain.Business.Jobs.Processos
             Task.Run(() => consultaProcessosSistema.ConsultarProcessosAsync(sistema, processosMonitor));
         }
 
+        public static void ExcluirDadosAntigos(long handleAmbiente, DateTime dataCorte, ISession session)
+        {
+            session.Query<ProcessosCheck>()
+                .Where(c => c.HandleAmbiente == handleAmbiente && c.DataHoraConsulta <= dataCorte)
+                .Delete();
+        }
+
     }
 }

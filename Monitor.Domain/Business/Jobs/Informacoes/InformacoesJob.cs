@@ -83,5 +83,12 @@ namespace Monitor.Domain.Business.Jobs.Informacoes
             Task.Run(() => consultaInformacoesSistema.ConsultarInformacoesAsync(sistema, informacoesMonitor));
         }
 
+        public static void ExcluirDadosAntigos(long handleAmbiente, DateTime dataCorte, ISession session)
+        {
+            session.Query<InformacoesCheck>()
+                .Where(c => c.HandleAmbiente == handleAmbiente && c.DataHoraConsulta <= dataCorte)
+                .Delete();
+        }
+
     }
 }
