@@ -288,8 +288,8 @@
         "for": "5m",
         "frequency": "1m",
         "handler": 1,
-        "message": "Existem serviços indisponíveis",
-        "name": "Serviços com Falha",
+        "message": "Temos serviços com falhas",
+        "name": "Falha em algum serviço !!!",
         "noDataState": "alerting",
         "notifications": [
           {
@@ -418,6 +418,160 @@
       }
     },
     {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                1
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "count"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "message": "Falha nos serviços",
+        "name": "Serviços com Falha",
+        "noDataState": "ok",
+        "notifications": [
+          {
+            "uid": "kwQbnwlMz"
+          }
+        ]
+      },
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 23
+      },
+      "hiddenSeries": false,
+      "id": 11,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.2",
+      "pointradius": 2,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:2365",
+          "alias": "Erro",
+          "color": "#F2495C",
+          "fill": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "",
+          "format": "time_series",
+          "rawSql": "SELECT \r\n  X.time,\r\n  SUM(X.value) AS VALUE,\r\n  x.metric\r\nfrom (\r\nSELECT\r\n  $__timeEpoch(C.DataHoraBateriaTestes),\r\n  count(1) as value,\r\n  S.nome as metric\r\nFROM\r\n  WebServiceCheck C\r\nJOIN \r\n  Sistema S on S.Handle = C.HandleSistema\r\nJOIN \r\n  Ambiente A on A.Handle = C.HandleAmbiente  \r\nWHERE\r\n  $__timeFilter(C.DataHoraBateriaTestes)\r\n  and C.Url is not null\r\n  and ISNULL(C.HttpStatusResposta, 0) != 200\r\nGROUP BY C.DataHoraBateriaTestes, S.Nome\r\n) x\r\nGROUP BY X.time, X.metric\r\nORDER BY 1 ASC",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 1,
+          "visible": true
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Serviços com Falha",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:2322",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:2323",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
       "dashboardFilter": "",
       "dashboardTags": [],
       "datasource": null,
@@ -429,10 +583,10 @@
       },
       "folderId": null,
       "gridPos": {
-        "h": 3,
+        "h": 5,
         "w": 11,
         "x": 0,
-        "y": 23
+        "y": 30
       },
       "id": 10,
       "limit": "5",
@@ -473,5 +627,5 @@
   "timezone": "",
   "title": "Disponibilidade Geral",
   "uid": "djUbPDlGa",
-  "version": 9
+  "version": 15
 }

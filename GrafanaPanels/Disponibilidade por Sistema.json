@@ -2,6 +2,7 @@
   "annotations": {
     "list": [
       {
+        "$$hashKey": "object:41",
         "builtIn": 1,
         "datasource": "-- Grafana --",
         "enable": true,
@@ -15,127 +16,10 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 2,
+  "id": 4,
+  "iteration": 1619531518651,
   "links": [],
   "panels": [
-    {
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {},
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 0,
-        "y": 0
-      },
-      "id": 4,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.4.2",
-      "targets": [
-        {
-          "alias": "",
-          "format": "time_series",
-          "rawSql": "SELECT\n  DATEDIFF(second, '1970-01-01', getdate()) AS time,\n  count(1) as value,\n  'Qtd Operadoras' as metric\nFROM\n  Sistema S\nJOIN\n  Ambiente A on A.handle = S.HandleAmbiente\nWHERE 1=1\n  --(A.Nome = '$Ambiente' or '$Ambiente' = '** TODOS **')\n  \n\n",
-          "refId": "A"
-        }
-      ],
-      "title": "Qtd. Sistemas",
-      "type": "stat"
-    },
-    {
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {},
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 1000
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 3,
-        "y": 0
-      },
-      "id": 6,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.4.2",
-      "targets": [
-        {
-          "alias": "",
-          "format": "time_series",
-          "rawSql": "SELECT\n  DATEDIFF(second, '1970-01-01', getdate()) AS time,\n  avg(c.DuracaoMilisegundosRequisicao) as value,\n  'Duração Média' as metric\nFROM\n  WebServiceCheck C\nJOIN\n  Ambiente A on a.Handle = c.HandleAmbiente\nWHERE\n  $__timeFilter(c.DataHoraBateriaTestes) \n  --and (A.Nome = '$Ambiente' or '$Ambiente' = '** TODOS **')\n  and C.DuracaoMilisegundosRequisicao is not null\n\n",
-          "refId": "A"
-        }
-      ],
-      "title": "Duração Média do Ping (ms)",
-      "type": "stat"
-    },
     {
       "cards": {
         "cardHSpacing": 2,
@@ -152,19 +36,19 @@
         "mode": "discrete",
         "thresholds": [
           {
-            "$$hashKey": "object:191",
-            "color": "#73BF69",
+            "$$hashKey": "object:181",
+            "color": "#37872D",
             "tooltip": "Disponível",
             "value": "2"
           },
           {
-            "$$hashKey": "object:195",
+            "$$hashKey": "object:185",
             "color": "#FF9830",
             "tooltip": "Intermitente",
             "value": "1"
           },
           {
-            "$$hashKey": "object:199",
+            "$$hashKey": "object:189",
             "color": "#F2495C",
             "tooltip": "Indisponível",
             "value": "0"
@@ -179,19 +63,18 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 13,
+        "h": 5,
         "w": 24,
         "x": 0,
-        "y": 3
+        "y": 0
       },
       "highlightCards": true,
-      "id": 2,
+      "id": 8,
       "legend": {
         "show": true
       },
       "nullPointMode": "as empty",
       "pageSize": 15,
-      "pluginVersion": "7.4.2",
       "seriesFilterIndex": -1,
       "statusmap": {
         "ConfigVersion": "v1"
@@ -200,13 +83,13 @@
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT\r\n  $__timeEpoch(H.DataHoraStatus),\r\n  (2-H.Status) as value,\r\n  A.Nome + ' - ' + S.Nome as metric\r\nFROM\r\n  WebServiceHealth H\r\nJOIN \r\n  Sistema S on S.Handle = H.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = H.HandleAmbiente  \r\nWHERE\r\n  $__timeFilter(H.DataHoraStatus) \r\n  --and (A.Nome = '$Ambiente' or '$Ambiente' = '** TODOS **')\r\n  and H.NomeServicoIntegracao is null\r\nORDER BY\r\n  A.Nome ASC, S.Nome ASC",
+          "rawSql": "SELECT\r\n  $__timeEpoch(H.DataHoraStatus),\r\n  (2-H.Status) as value,\r\n  LTRIM(STR(H.QuantidadeWebServices,2))+' Serviços' as metric\r\nFROM\r\n  WebServiceHealth H\r\nJOIN \r\n  Sistema S on S.Handle = H.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = H.HandleAmbiente  \r\nWHERE\r\n  $__timeFilter(H.DataHoraStatus) \r\n  and S.Nome = '$Sistema' \r\n  and A.Nome = '$Ambiente'\r\n  and H.Url is null\r\nORDER BY\r\n  H.DataHoraStatus ASC",
           "refId": "A"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Disponibilidade Geral dos Serviços por Sistema",
+      "title": "Disponibilidade Geral do Sistema",
       "tooltip": {
         "extraInfo": "",
         "freezeOnClick": true,
@@ -234,69 +117,108 @@
       }
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
+      "cards": {
+        "cardHSpacing": 2,
+        "cardMinWidth": 5,
+        "cardRound": null,
+        "cardVSpacing": 2
+      },
+      "color": {
+        "cardColor": "#b4ff00",
+        "colorScale": "sqrt",
+        "colorScheme": "interpolateGnYlRd",
+        "defaultColor": "#757575",
+        "exponent": 0.5,
+        "mode": "discrete",
+        "thresholds": [
           {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "B",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "sum"
-            },
-            "type": "query"
+            "$$hashKey": "object:181",
+            "color": "#37872D",
+            "tooltip": "Disponível",
+            "value": "2"
           },
           {
-            "evaluator": {
-              "params": [
-                1
-              ],
-              "type": "lt"
-            },
-            "operator": {
-              "type": "or"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "sum"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Temos serviços com falhas",
-        "name": "Falha em algum serviço !!!",
-        "noDataState": "alerting",
-        "notifications": [
+            "$$hashKey": "object:185",
+            "color": "#FF9830",
+            "tooltip": "Intermitente",
+            "value": "1"
+          },
           {
-            "uid": "kwQbnwlMz"
+            "$$hashKey": "object:189",
+            "color": "#F2495C",
+            "tooltip": "Indisponível",
+            "value": "0"
+          },
+          {
+            "$$hashKey": "object:672",
+            "color": "#C0D8FF",
+            "tooltip": "Suspenso",
+            "value": "-1"
           }
         ]
       },
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "highlightCards": true,
+      "id": 9,
+      "legend": {
+        "show": true
+      },
+      "nullPointMode": "as empty",
+      "pageSize": 15,
+      "seriesFilterIndex": -1,
+      "statusmap": {
+        "ConfigVersion": "v1"
+      },
+      "targets": [
+        {
+          "alias": "",
+          "format": "time_series",
+          "rawSql": "SELECT\r\n  $__timeEpoch(H.DataHoraStatus),\r\n  (2-H.Status) as value,\r\n  H.NomeServicoIntegracao as metric\r\nFROM\r\n  WebServiceHealth H\r\nJOIN \r\n  Sistema S on S.Handle = H.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = H.HandleAmbiente  \r\nWHERE\r\n  $__timeFilter(H.DataHoraStatus) \r\n  and S.Nome = '$Sistema' \r\n  and A.Nome = '$Ambiente'\r\n  and H.NomeServicoIntegracao is not null\r\nORDER BY\r\n  H.DataHoraStatus ASC, H.NomeServicoIntegracao ASC",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Disponibilidade por Serviço",
+      "tooltip": {
+        "extraInfo": "",
+        "freezeOnClick": true,
+        "items": [],
+        "show": true,
+        "showExtraInfo": false,
+        "showItems": false
+      },
+      "type": "flant-statusmap-panel",
+      "useMax": true,
+      "usingPagination": false,
+      "xAxis": {
+        "show": true
+      },
+      "yAxis": {
+        "maxWidth": -1,
+        "minWidth": -1,
+        "show": true
+      },
+      "yAxisSort": "metrics",
+      "yLabel": {
+        "delimiter": "",
+        "labelTemplate": "",
+        "usingSplitLabel": false
+      }
+    },
+    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -305,7 +227,8 @@
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "custom": {},
+          "links": []
         },
         "overrides": []
       },
@@ -318,15 +241,16 @@
         "y": 16
       },
       "hiddenSeries": false,
-      "id": 8,
+      "hideTimeOverride": false,
+      "id": 14,
       "legend": {
         "avg": false,
-        "current": false,
+        "current": true,
         "max": false,
         "min": false,
         "show": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -341,10 +265,7 @@
       "renderer": "flot",
       "seriesOverrides": [
         {
-          "$$hashKey": "object:2365",
-          "alias": "Erro",
-          "color": "#F2495C",
-          "fill": 2
+          "$$hashKey": "object:295"
         }
       ],
       "spaceLength": 10,
@@ -354,27 +275,142 @@
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT \r\n  X.time,\r\n  SUM(X.value) AS VALUE,\r\n  x.metric\r\nfrom (\r\nSELECT\r\n  $__timeEpoch(C.DataHoraBateriaTestes),\r\n  count(1) as value,\r\n  'Sucesso' as metric\r\nFROM\r\n  WebServiceCheck C\r\nJOIN \r\n  Sistema S on S.Handle = C.HandleSistema\r\nJOIN \r\n  Ambiente A on A.Handle = C.HandleAmbiente  \r\nWHERE\r\n  $__timeFilter(C.DataHoraBateriaTestes)\r\n  --and (A.Nome = '$Ambiente' or '$Ambiente' = '** TODOS **')\r\n  and C.Url is not null\r\n  and ISNULL(C.HttpStatusResposta, 0) = 200\r\nGROUP BY C.DataHoraBateriaTestes\r\nUNION\r\nSELECT\r\n  $__timeEpoch(C.DataHoraBateriaTestes),\r\n  0 as value,\r\n  'Sucesso' as metric\r\nFROM\r\n  WebServiceCheck C\r\nJOIN \r\n  Sistema S on S.Handle = C.HandleSistema\r\nJOIN \r\n  Ambiente A on A.Handle = C.HandleAmbiente\r\nWHERE\r\n  $__timeFilter(C.DataHoraBateriaTestes)\r\n  --and (A.Nome = '$Ambiente' or '$Ambiente' = '** TODOS **')\r\n  and C.Url is not null\r\n  and ISNULL(C.HttpStatusResposta, 0) != 200\r\nGROUP BY C.DataHoraBateriaTestes\r\n) x\r\nGROUP BY X.TIME, X.METRIC\r\nORDER BY\r\n  1 ASC",
+          "rawSql": "SELECT\n  $__timeEpoch(H.DataHoraStatus),\n  H.TempoMediaResposta as value,\n  H.NOMESERVICOINTEGRACAO as metric\nFROM\n  WebServiceHealth H\nJOIN \n  Sistema S on S.Handle = H.HandleSistema\nJOIN\n  Ambiente A on A.Handle = H.HandleAmbiente\nWHERE\n  $__timeFilter(H.DataHoraStatus) \n  and S.Nome = '$Sistema' \n  and A.Nome = '$Ambiente'\n  and H.Url is not null\n  and H.TempoMediaResposta is not null\nORDER BY\n  H.DataHoraStatus ASC",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Tempo Resposta do Ping por Servço",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:216",
+          "decimals": 0,
+          "format": "short",
+          "label": "Milissegundos",
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:217",
+          "format": "dtdurationms",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 23
+      },
+      "hiddenSeries": false,
+      "id": 6,
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.2",
+      "pointradius": 2,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:462",
+          "alias": "Erro",
+          "color": "#F2495C",
+          "fill": 2
+        },
+        {
+          "$$hashKey": "object:474",
+          "alias": "Suspenso",
+          "color": "rgb(140, 140, 140)"
+        },
+        {
+          "$$hashKey": "object:546",
+          "alias": "Qtd Total",
+          "color": "#5794F2",
+          "dashes": true,
+          "points": false
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "",
+          "format": "time_series",
+          "rawSql": "SELECT \r\n  X.time,\r\n  SUM(X.value) AS VALUE,\r\n  x.metric\r\nfrom (\r\nSELECT\r\n  $__timeEpoch(C.DataHoraBateriaTestes),\r\n  count(1) as value,\r\n  'Sucesso' as metric\r\nFROM\r\n  WebServiceCheck C\r\nJOIN \r\n  Sistema S on S.Handle = C.HandleSistema\r\nJOIN \r\n  Ambiente A on A.Handle = C.HandleAmbiente  \r\nWHERE\r\n  $__timeFilter(C.DataHoraBateriaTestes)\r\n  and S.Nome = '$Sistema' \r\n  and A.Nome = '$Ambiente'\r\n  and C.Url is not null\r\n  and ISNULL(C.HttpStatusResposta, 0) = 200\r\nGROUP BY C.DataHoraBateriaTestes\r\nUNION\r\nSELECT\r\n  $__timeEpoch(C.DataHoraBateriaTestes),\r\n  0 as value,\r\n  'Sucesso' as metric\r\nFROM\r\n  WebServiceCheck C\r\nJOIN \r\n  Sistema S on S.Handle = C.HandleSistema\r\nJOIN \r\n  Ambiente A on A.Handle = C.HandleAmbiente\r\nWHERE\r\n  $__timeFilter(C.DataHoraBateriaTestes)\r\n  and S.Nome = '$Sistema' \r\n  and A.Nome = '$Ambiente'\r\n  and C.Url is not null\r\n  and ISNULL(C.HttpStatusResposta, 0) != 200\r\nGROUP BY C.DataHoraBateriaTestes\r\n) x\r\nGROUP BY X.TIME, X.METRIC\r\nORDER BY\r\n  1 ASC",
           "refId": "A"
         },
         {
           "alias": "",
           "format": "time_series",
           "hide": false,
-          "rawSql": "SELECT \r\n  X.time,\r\n  SUM(X.value) AS VALUE,\r\n  x.metric\r\nfrom (\r\nSELECT\r\n  $__timeEpoch(C.DataHoraBateriaTestes),\r\n  count(1) as value,\r\n  'Erro' as metric\r\nFROM\r\n  WebServiceCheck C\r\nJOIN \r\n  Sistema S on S.Handle = C.HandleSistema\r\nJOIN \r\n  Ambiente A on A.Handle = C.HandleAmbiente  \r\nWHERE\r\n  $__timeFilter(C.DataHoraBateriaTestes)\r\n  --and (A.Nome = '$Ambiente' or '$Ambiente' = '** TODOS **')\r\n  and C.Url is not null\r\n  and ISNULL(C.HttpStatusResposta, 0) != 200\r\nGROUP BY C.DataHoraBateriaTestes\r\nUNION\r\nSELECT\r\n  $__timeEpoch(C.DataHoraBateriaTestes),\r\n  0 as value,\r\n  'Erro' as metric\r\nFROM\r\n  WebServiceCheck C\r\nJOIN \r\n  Sistema S on S.Handle = C.HandleSistema\r\nJOIN \r\n  Ambiente A on A.Handle = C.HandleAmbiente\r\nWHERE\r\n  $__timeFilter(C.DataHoraBateriaTestes)\r\n  --and (A.Nome = '$Ambiente' or '$Ambiente' = '** TODOS **')\r\n  and C.Url is not null\r\n  and (ISNULL(C.HttpStatusResposta, 0) = 200)\r\nGROUP BY C.DataHoraBateriaTestes\r\n) x\r\nGROUP BY X.time, X.metric\r\nORDER BY\r\n  1 ASC",
+          "rawSql": "SELECT \r\n  X.time,\r\n  SUM(X.value) AS VALUE,\r\n  x.metric\r\nfrom (\r\nSELECT\r\n  $__timeEpoch(C.DataHoraBateriaTestes),\r\n  count(1) as value,\r\n  'Erro' as metric\r\nFROM\r\n  WebServiceCheck C\r\nJOIN \r\n  Sistema S on S.Handle = C.HandleSistema\r\nJOIN \r\n  Ambiente A on A.Handle = C.HandleAmbiente  \r\nWHERE\r\n  $__timeFilter(C.DataHoraBateriaTestes)\r\n  and S.Nome = '$Sistema'  \r\n  and A.Nome = '$Ambiente'\r\n  and C.Url is not null\r\n  and ISNULL(C.HttpStatusResposta, 0) != 200\r\nGROUP BY C.DataHoraBateriaTestes\r\nUNION\r\nSELECT\r\n  $__timeEpoch(C.DataHoraBateriaTestes),\r\n  0 as value,\r\n  'Erro' as metric\r\nFROM\r\n  WebServiceCheck C\r\nJOIN \r\n  Sistema S on S.Handle = C.HandleSistema\r\nJOIN \r\n  Ambiente A on A.Handle = C.HandleAmbiente\r\nWHERE\r\n  $__timeFilter(C.DataHoraBateriaTestes)\r\n  and S.Nome = '$Sistema' \r\n  and A.Nome = '$Ambiente'\r\n  and C.Url is not null\r\n  and (ISNULL(C.HttpStatusResposta, 0) = 200)\r\nGROUP BY C.DataHoraBateriaTestes\r\n) x\r\nGROUP BY X.time, X.metric\r\nORDER BY\r\n  1 ASC",
           "refId": "B"
-        }
-      ],
-      "thresholds": [
+        },
         {
-          "colorMode": "critical",
-          "fill": true,
-          "line": true,
-          "op": "gt",
-          "value": 0,
-          "visible": true
+          "alias": "",
+          "format": "time_series",
+          "rawSql": "SELECT\r\n  $__timeEpoch(C.DataHoraBateriaTestes),\r\n  count(1) as value,\r\n  'Qtd Total' as metric\r\nFROM\r\n  WebServiceCheck C\r\nJOIN \r\n  Sistema S on S.Handle = C.HandleSistema\r\nJOIN \r\n  Ambiente A on A.Handle = C.HandleAmbiente  \r\nWHERE\r\n  $__timeFilter(C.DataHoraBateriaTestes)\r\n  and S.Nome = '$Sistema' \r\n  and A.Nome = '$Ambiente'\r\n  and C.Url is not null\r\nGROUP BY C.DataHoraBateriaTestes\r\nORDER BY\r\n  1 ASC",
+          "refId": "C"
         }
       ],
+      "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
@@ -394,16 +430,17 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:2322",
+          "$$hashKey": "object:968",
+          "decimals": 0,
           "format": "short",
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
-          "$$hashKey": "object:2323",
+          "$$hashKey": "object:969",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -418,55 +455,15 @@
       }
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                1
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "count"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Falha nos serviços",
-        "name": "Serviços com Falha",
-        "noDataState": "ok",
-        "notifications": [
-          {
-            "uid": "kwQbnwlMz"
-          }
-        ]
-      },
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
-      "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "custom": {},
+          "links": []
         },
         "overrides": []
       },
@@ -474,20 +471,21 @@
       "fillGradient": 0,
       "gridPos": {
         "h": 7,
-        "w": 24,
-        "x": 0,
+        "w": 12,
+        "x": 12,
         "y": 23
       },
       "hiddenSeries": false,
-      "id": 11,
+      "hideTimeOverride": false,
+      "id": 2,
       "legend": {
         "avg": false,
-        "current": false,
+        "current": true,
         "max": false,
         "min": false,
         "show": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -502,10 +500,7 @@
       "renderer": "flot",
       "seriesOverrides": [
         {
-          "$$hashKey": "object:2365",
-          "alias": "Erro",
-          "color": "#F2495C",
-          "fill": 2
+          "$$hashKey": "object:295"
         }
       ],
       "spaceLength": 10,
@@ -515,24 +510,15 @@
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT \r\n  X.time,\r\n  SUM(X.value) AS VALUE,\r\n  x.metric\r\nfrom (\r\nSELECT\r\n  $__timeEpoch(C.DataHoraBateriaTestes),\r\n  count(1) as value,\r\n  S.nome as metric\r\nFROM\r\n  WebServiceCheck C\r\nJOIN \r\n  Sistema S on S.Handle = C.HandleSistema\r\nJOIN \r\n  Ambiente A on A.Handle = C.HandleAmbiente  \r\nWHERE\r\n  $__timeFilter(C.DataHoraBateriaTestes)\r\n  and C.Url is not null\r\n  and ISNULL(C.HttpStatusResposta, 0) != 200\r\nGROUP BY C.DataHoraBateriaTestes, S.Nome\r\n) x\r\nGROUP BY X.time, X.metric\r\nORDER BY 1 ASC",
+          "rawSql": "SELECT\n  $__timeEpoch(H.DataHoraStatus),\n  H.TempoMediaResposta as value,\n  S.NOME as metric\nFROM\n  WebServiceHealth H\nJOIN \n  Sistema S on S.Handle = H.HandleSistema\nJOIN\n  Ambiente A on A.Handle = H.HandleAmbiente\nWHERE\n  $__timeFilter(H.DataHoraStatus) \n  and S.Nome = '$Sistema' \n  and A.Nome = '$Ambiente'\n  and H.Url is null\n  and H.TempoMediaResposta is not null\nORDER BY\n  H.DataHoraStatus ASC",
           "refId": "A"
         }
       ],
-      "thresholds": [
-        {
-          "colorMode": "critical",
-          "fill": true,
-          "line": true,
-          "op": "gt",
-          "value": 1,
-          "visible": true
-        }
-      ],
+      "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Serviços com Falha",
+      "title": "Tempo Médio Resposta do Ping (Geral)",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -548,18 +534,19 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:2322",
+          "$$hashKey": "object:216",
+          "decimals": 0,
           "format": "short",
-          "label": null,
+          "label": "Milissegundos",
           "logBase": 1,
           "max": null,
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
-          "$$hashKey": "object:2323",
-          "format": "short",
-          "label": null,
+          "$$hashKey": "object:217",
+          "format": "dtdurationms",
+          "label": "",
           "logBase": 1,
           "max": null,
           "min": null,
@@ -572,42 +559,172 @@
       }
     },
     {
-      "dashboardFilter": "",
-      "dashboardTags": [],
       "datasource": null,
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "right",
+            "filterable": false
+          },
+          "decimals": 2,
+          "displayName": "",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Time"
+              },
+              {
+                "id": "unit",
+                "value": "time: YYYY-MM-DD HH:mm:ss"
+              },
+              {
+                "id": "custom.align",
+                "value": null
+              }
+            ]
+          }
+        ]
       },
-      "folderId": null,
       "gridPos": {
-        "h": 5,
-        "w": 11,
+        "h": 7,
+        "w": 24,
         "x": 0,
         "y": 30
       },
-      "id": 10,
-      "limit": "5",
-      "nameFilter": "",
-      "onlyAlertsOnDashboard": false,
+      "id": 13,
+      "options": {
+        "showHeader": true
+      },
       "pluginVersion": "7.4.2",
-      "show": "current",
-      "sortOrder": 1,
-      "stateFilter": [],
       "targets": [
         {
           "alias": "",
-          "format": "time_series",
-          "rawSql": "SELECT\n  $__timeEpoch(<time_column>),\n  <value column> as value,\n  <series name column> as metric\nFROM\n  <table name>\nWHERE\n  $__timeFilter(time_column)\nORDER BY\n  <time_column> ASC",
+          "format": "table",
+          "rawSql": "SELECT distinct\r\n  C.NomeServicoIntegracao Servico,\r\n  C.Url,\r\n  C.TipoExcecao,\r\n  c.DetalhesExcecao,\r\n  count(1) AS Qtd\r\nFROM\r\n  WebServiceCheck C\r\nJOIN \r\n  Sistema S on S.Handle = C.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = C.HandleAmbiente  \r\nWHERE\r\n  $__timeFilter(C.DataHoraBateriaTestes) \r\n  and S.Nome = '$Sistema' \r\n  and A.Nome = '$Ambiente'\r\n  and C.NomeServicoIntegracao is not null\r\n  and c.TipoExcecao is not null\r\ngroup by C.NomeServicoIntegracao,\r\n  C.Url,\r\n  C.TipoExcecao,\r\n  c.DetalhesExcecao\r\norder by C.NomeServicoIntegracao  ",
           "refId": "A"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Alertas",
-      "type": "alertlist"
+      "title": "Exceções Ocorridas",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {
+            "reducers": []
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "right",
+            "filterable": false
+          },
+          "decimals": 2,
+          "displayName": "",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Time"
+              },
+              {
+                "id": "unit",
+                "value": "time: YYYY-MM-DD HH:mm:ss"
+              },
+              {
+                "id": "custom.align",
+                "value": null
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 37
+      },
+      "id": 11,
+      "options": {
+        "showHeader": true
+      },
+      "pluginVersion": "7.4.2",
+      "targets": [
+        {
+          "alias": "",
+          "format": "table",
+          "rawSql": "SELECT distinct\r\n  H.NomeServicoIntegracao Servico,\r\n  H.Url\r\nFROM\r\n  WebServiceHealth H\r\nJOIN \r\n  Sistema S on S.Handle = H.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = H.HandleAmbiente  \r\nWHERE\r\n  $__timeFilter(H.DataHoraStatus) \r\n  and S.Nome = '$Sistema' \r\n  and A.Nome = '$Ambiente'\r\n  and H.NomeServicoIntegracao is not null\r\nORDER BY\r\n  H.NomeServicoIntegracao",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "URL dos Serviços",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {
+            "reducers": []
+          }
+        }
+      ],
+      "type": "table"
     }
   ],
   "refresh": "1m",
@@ -617,15 +734,85 @@
     "disponibilidade"
   ],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "Produção Clientes AG",
+          "value": "Produção Clientes AG"
+        },
+        "datasource": null,
+        "definition": "SELECT Nome FROM Ambiente",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "Ambiente",
+        "options": [],
+        "query": "SELECT Nome FROM Ambiente",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "Postal - AG",
+          "value": "Postal - AG"
+        },
+        "datasource": null,
+        "definition": "SELECT S.NOME\nFROM SISTEMA S\nJOIN AMBIENTE A ON A.HANDLE  = S.HANDLEAMBIENTE\nWHERE A.NOME = '$Ambiente'",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "Sistema",
+        "options": [],
+        "query": "SELECT S.NOME\nFROM SISTEMA S\nJOIN AMBIENTE A ON A.HANDLE  = S.HANDLEAMBIENTE\nWHERE A.NOME = '$Ambiente'",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
   "time": {
     "from": "now-1h",
     "to": "now"
   },
-  "timepicker": {},
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
   "timezone": "",
-  "title": "Disponibilidade Geral",
-  "uid": "djUbPDlGa",
-  "version": 15
+  "title": "Disponibilidade por Sistema",
+  "uid": "93VQ81qZk",
+  "version": 7
 }
