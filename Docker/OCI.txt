@@ -1,0 +1,11 @@
+Dados do ambiente de produçãod da OCI
+
+Banco de dados:
+    server: bennerdb001
+	user: sa_040cli57
+	password: #sqljur57sa
+    Banco:  DC040_CLI57_KBTS_PROD
+
+Servidor de aplicação: OCI040-CLI57
+
+
