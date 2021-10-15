@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 4,
-  "iteration": 1619531518651,
+  "iteration": 1634293308212,
   "links": [],
   "panels": [
     {
@@ -767,8 +767,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "Postal - AG",
-          "value": "Postal - AG"
+          "text": "Assefaz",
+          "value": "Assefaz"
         },
         "datasource": null,
         "definition": "SELECT S.NOME\nFROM SISTEMA S\nJOIN AMBIENTE A ON A.HANDLE  = S.HANDLEAMBIENTE\nWHERE A.NOME = '$Ambiente'",
@@ -814,5 +814,5 @@
   "timezone": "",
   "title": "Disponibilidade por Sistema",
   "uid": "93VQ81qZk",
-  "version": 7
+  "version": 11
 }

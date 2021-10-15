@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 5,
-  "iteration": 1619435013567,
+  "iteration": 1634293501269,
   "links": [],
   "panels": [
     {
@@ -433,7 +433,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "QUALIDADEAGCORRENTE",
           "value": "QUALIDADEAGCORRENTE"
         },

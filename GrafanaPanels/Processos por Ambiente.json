@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 7,
-  "iteration": 1618425595134,
+  "iteration": 1634293489273,
   "links": [],
   "panels": [
     {
@@ -168,7 +168,7 @@
       "points": false,
       "renderer": "flot",
       "repeatDirection": "h",
-      "repeatIteration": 1618425595134,
+      "repeatIteration": 1634293489273,
       "repeatPanelId": 2,
       "scopedVars": {
         "Sistema": {
@@ -241,7 +241,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "Qualidade",
           "value": "Qualidade"
         },
@@ -270,7 +270,6 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "tags": [],
           "text": [
             "QUALIDADEAGCORRENTE",
             "QUALIDADEAGHOM"

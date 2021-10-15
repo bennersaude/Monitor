@@ -1,0 +1,438 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "id": 13,
+    "iteration": 1634293322444,
+    "links": [],
+    "panels": [
+      {
+        "aliasColors": {},
+        "breakPoint": "50%",
+        "cacheTimeout": null,
+        "combine": {
+          "label": "Others",
+          "threshold": 0
+        },
+        "datasource": null,
+        "decimals": 2,
+        "fieldConfig": {
+          "defaults": {
+            "color": {},
+            "custom": {},
+            "thresholds": {
+              "mode": "absolute",
+              "steps": []
+            }
+          },
+          "overrides": []
+        },
+        "fontSize": "80%",
+        "format": "short",
+        "gridPos": {
+          "h": 11,
+          "w": 11,
+          "x": 0,
+          "y": 0
+        },
+        "id": 4,
+        "interval": null,
+        "legend": {
+          "header": "Requisições",
+          "percentage": true,
+          "percentageDecimals": 2,
+          "show": true,
+          "sideWidth": null,
+          "values": true
+        },
+        "legendType": "Right side",
+        "links": [],
+        "nullPointMode": "connected",
+        "pieType": "pie",
+        "pluginVersion": "7.4.2",
+        "strokeWidth": "1",
+        "targets": [
+          {
+            "alias": "",
+            "format": "time_series",
+            "rawSql": "select Y.time, \r\n       --Y.QtdTotal, \r\n       Y.Disponivel, \r\n       Y.Intermitente, \r\n       Y.Falha\r\nfrom (\r\n\r\nselect x.time, \r\n       sum(X.QtdDiponivel+X.QtdIntermitente+X.QtdFalha) QtdTotal, \r\n       sum(X.QtdDiponivel) as Disponivel, \r\n       sum(X.QtdIntermitente) as Intermitente, \r\n       sum(X.QtdFalha) as Falha\r\nfrom (\r\nSELECT\r\n  $__timeGroup(H.DataHoraStatus, '30d') AS time,\r\n  count(S.Nome) as QtdDiponivel,\r\n  0 QtdIntermitente,\r\n  0 QtdFalha,\r\n  case when h.status = 0 then 'Disponível' when h.status = 1 Then 'Intermitente' when h.status = 2 then 'Falha' end metric\r\nFROM\r\n  WebServiceHealth H\r\nJOIN \r\n  Sistema S on S.Handle = H.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = H.HandleAmbiente\r\nWHERE\r\n  $__timeFilter(H.DataHoraStatus) \r\n  and S.Nome in ($Sistema) \r\n  and A.Nome = '$Ambiente'\r\n  and H.NomeServicoIntegracao is not null\r\n  and H.Status = 0\r\nGROUP BY $__timeGroup(H.DataHoraStatus, '30d'),s.nome, h.status\r\nUnion ALL\r\nSELECT\r\n  $__timeGroup(H.DataHoraStatus, '30d') AS time,\r\n  0 QtdDiponivel,\r\n  count(S.Nome) as QtdIntermitente,\r\n  0 QtdFalha,\r\n  case when h.status = 0 then 'Disponível' when h.status = 1 Then 'Intermitente' when h.status = 2 then 'Falha' end metric\r\nFROM\r\n  WebServiceHealth H\r\nJOIN \r\n  Sistema S on S.Handle = H.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = H.HandleAmbiente\r\nWHERE\r\n  $__timeFilter(H.DataHoraStatus) \r\n  and S.Nome in ($Sistema) \r\n  and A.Nome = '$Ambiente'\r\n  and H.NomeServicoIntegracao is not null\r\n  and H.Status = 1\r\nGROUP BY $__timeGroup(H.DataHoraStatus, '30d'),s.nome, h.status\r\nUnion ALL\r\nSELECT\r\n  $__timeGroup(H.DataHoraStatus, '30d') AS time,\r\n  0 QtdDiponivel,\r\n  0 QtdIntermitente,\r\n  count(S.Nome) as QtdFalha,\r\n  case when h.status = 0 then 'Disponível' when h.status = 1 Then 'Intermitente' when h.status = 2 then 'Falha' end metric\r\nFROM\r\n  WebServiceHealth H\r\nJOIN \r\n  Sistema S on S.Handle = H.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = H.HandleAmbiente\r\nWHERE\r\n  $__timeFilter(H.DataHoraStatus) \r\n  and S.Nome in ($Sistema) \r\n  and A.Nome = '$Ambiente'\r\n  and H.NomeServicoIntegracao is not null\r\n  and H.Status = 2\r\nGROUP BY $__timeGroup(H.DataHoraStatus, '30d'),s.nome, h.status\r\n) X\r\ngroup by x.time\r\n\r\n) Y",
+            "refId": "A"
+          }
+        ],
+        "title": "Disponibilidade",
+        "type": "grafana-piechart-panel",
+        "valueName": "current"
+      },
+      {
+        "cacheTimeout": null,
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "percentage",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 11,
+          "w": 11,
+          "x": 11,
+          "y": 0
+        },
+        "id": 5,
+        "interval": null,
+        "links": [],
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": true
+          },
+          "text": {},
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "7.4.2",
+        "targets": [
+          {
+            "alias": "",
+            "format": "time_series",
+            "rawSql": "select Y.time, \r\n       --Y.QtdTotal, \r\n       Y.Disponivel, \r\n       Y.Intermitente, \r\n       Y.Falha\r\nfrom (\r\n\r\nselect x.time, \r\n       sum(X.QtdDiponivel+X.QtdIntermitente+X.QtdFalha) QtdTotal, \r\n       sum(X.QtdDiponivel) as Disponivel, \r\n       sum(X.QtdIntermitente) as Intermitente, \r\n       sum(X.QtdFalha) as Falha\r\nfrom (\r\nSELECT\r\n  $__timeGroup(H.DataHoraStatus, '3M') AS time,\r\n  count(S.Nome) as QtdDiponivel,\r\n  0 QtdIntermitente,\r\n  0 QtdFalha,\r\n  case when h.status = 0 then 'Disponível' when h.status = 1 Then 'Intermitente' when h.status = 2 then 'Falha' end metric\r\nFROM\r\n  WebServiceHealth H\r\nJOIN \r\n  Sistema S on S.Handle = H.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = H.HandleAmbiente\r\nWHERE\r\n  $__timeFilter(H.DataHoraStatus) \r\n  and S.Nome in ($Sistema) \r\n  and A.Nome = '$Ambiente'\r\n  and H.NomeServicoIntegracao is not null\r\n  and H.Status = 0\r\nGROUP BY $__timeGroup(H.DataHoraStatus, '3M'),s.nome, h.status\r\nUnion ALL\r\nSELECT\r\n  $__timeGroup(H.DataHoraStatus, '3M') AS time,\r\n  0 QtdDiponivel,\r\n  count(S.Nome) as QtdIntermitente,\r\n  0 QtdFalha,\r\n  case when h.status = 0 then 'Disponível' when h.status = 1 Then 'Intermitente' when h.status = 2 then 'Falha' end metric\r\nFROM\r\n  WebServiceHealth H\r\nJOIN \r\n  Sistema S on S.Handle = H.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = H.HandleAmbiente\r\nWHERE\r\n  $__timeFilter(H.DataHoraStatus) \r\n  and S.Nome in ($Sistema) \r\n  and A.Nome = '$Ambiente'\r\n  and H.NomeServicoIntegracao is not null\r\n  and H.Status = 1\r\nGROUP BY $__timeGroup(H.DataHoraStatus, '3M'),s.nome, h.status\r\nUnion ALL\r\nSELECT\r\n  $__timeGroup(H.DataHoraStatus, '3M') AS time,\r\n  0 QtdDiponivel,\r\n  0 QtdIntermitente,\r\n  count(S.Nome) as QtdFalha,\r\n  case when h.status = 0 then 'Disponível' when h.status = 1 Then 'Intermitente' when h.status = 2 then 'Falha' end metric\r\nFROM\r\n  WebServiceHealth H\r\nJOIN \r\n  Sistema S on S.Handle = H.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = H.HandleAmbiente\r\nWHERE\r\n  $__timeFilter(H.DataHoraStatus) \r\n  and S.Nome in ($Sistema) \r\n  and A.Nome = '$Ambiente'\r\n  and H.NomeServicoIntegracao is not null\r\n  and H.Status = 2\r\nGROUP BY $__timeGroup(H.DataHoraStatus, '3M'),s.nome, h.status\r\n) X\r\ngroup by x.time\r\n\r\n) Y",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Disponibilidade",
+        "type": "stat"
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "cacheTimeout": null,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {
+            "color": {},
+            "custom": {},
+            "thresholds": {
+              "mode": "absolute",
+              "steps": []
+            }
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 8,
+          "w": 22,
+          "x": 0,
+          "y": 11
+        },
+        "hiddenSeries": false,
+        "hideTimeOverride": false,
+        "id": 6,
+        "interval": null,
+        "legend": {
+          "alignAsTable": false,
+          "avg": false,
+          "current": false,
+          "hideEmpty": false,
+          "hideZero": false,
+          "max": true,
+          "min": false,
+          "rightSide": false,
+          "show": true,
+          "total": false,
+          "values": true
+        },
+        "lines": true,
+        "linewidth": 2,
+        "links": [],
+        "maxDataPoints": null,
+        "nullPointMode": "connected",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.4.2",
+        "pointradius": 1,
+        "points": true,
+        "renderer": "flot",
+        "seriesOverrides": [
+          {
+            "$$hashKey": "object:790",
+            "alias": "Falha",
+            "color": "#F2495C"
+          }
+        ],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "alias": "",
+            "format": "time_series",
+            "rawSql": "Select x.time, sum(x.QtdDiponivel), x.metric\r\nfrom (\r\nSELECT\r\n  $__timeGroup(H.DataHoraStatus, '30m') as time,\r\n  count(S.Nome) as QtdDiponivel,\r\n  'Disponível' as metric\r\nFROM\r\n  WebServiceHealth H\r\nJOIN \r\n  Sistema S on S.Handle = H.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = H.HandleAmbiente\r\nWHERE\r\n  $__timeFilter(H.DataHoraStatus) \r\n  and S.Nome in ($Sistema) \r\n  and A.Nome = '$Ambiente'\r\n  and H.NomeServicoIntegracao is not null\r\n  and H.Status = 0\r\nGROUP BY $__timeGroup(H.DataHoraStatus,'30m'), s.nome, h.status\r\n) X\r\nGROUP BY x.time, x.metric\r\norder by 1",
+            "refId": "A"
+          },
+          {
+            "alias": "",
+            "format": "time_series",
+            "hide": false,
+            "rawSql": "Select x.time, sum(x.QtdDiponivel), x.metric\r\nfrom (\r\nSELECT\r\n  $__timeGroup(H.DataHoraStatus, '30m') as time,\r\n  count(S.Nome) as QtdDiponivel,\r\n  'Intermitente' as metric\r\nFROM\r\n  WebServiceHealth H\r\nJOIN \r\n  Sistema S on S.Handle = H.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = H.HandleAmbiente\r\nWHERE\r\n  $__timeFilter(H.DataHoraStatus) \r\n  and S.Nome in ($Sistema) \r\n  and A.Nome = '$Ambiente'\r\n  and H.NomeServicoIntegracao is not null\r\n  and H.Status = 1\r\nGROUP BY $__timeGroup(H.DataHoraStatus,'30m'), s.nome, h.status\r\n) X\r\nGROUP BY x.time, x.metric\r\norder by 1",
+            "refId": "B"
+          },
+          {
+            "alias": "",
+            "format": "time_series",
+            "hide": false,
+            "rawSql": "Select x.time, sum(x.QtdDiponivel), x.metric\r\nfrom (\r\nSELECT\r\n  $__timeGroup(H.DataHoraStatus, '30m') as time,\r\n  count(S.Nome) as QtdDiponivel,\r\n  'Falha' as metric\r\nFROM\r\n  WebServiceHealth H\r\nJOIN \r\n  Sistema S on S.Handle = H.HandleSistema\r\nJOIN\r\n  Ambiente A on A.Handle = H.HandleAmbiente\r\nWHERE\r\n  $__timeFilter(H.DataHoraStatus) \r\n  and S.Nome in ($Sistema) \r\n  and A.Nome = '$Ambiente'\r\n  and H.NomeServicoIntegracao is not null\r\n  and H.Status = 2\r\nGROUP BY $__timeGroup(H.DataHoraStatus,'30m'), s.nome, h.status\r\n) X\r\nGROUP BY x.time, x.metric\r\norder by 1",
+            "refId": "C"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "Disponibilidade",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:408",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "$$hashKey": "object:409",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      }
+    ],
+    "refresh": false,
+    "schemaVersion": 27,
+    "style": "dark",
+    "tags": [
+      "disponibilidade"
+    ],
+    "templating": {
+      "list": [
+        {
+          "allValue": null,
+          "current": {
+            "selected": false,
+            "text": "Qualidade",
+            "value": "Qualidade"
+          },
+          "datasource": null,
+          "definition": "SELECT Nome FROM Ambiente",
+          "description": null,
+          "error": null,
+          "hide": 0,
+          "includeAll": false,
+          "label": null,
+          "multi": false,
+          "name": "Ambiente",
+          "options": [],
+          "query": "SELECT Nome FROM Ambiente",
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "tagValuesQuery": "",
+          "tags": [],
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        },
+        {
+          "allValue": null,
+          "current": {
+            "selected": false,
+            "text": "All",
+            "value": "$__all"
+          },
+          "datasource": null,
+          "definition": "SELECT S.NOME\nFROM SISTEMA S\nJOIN AMBIENTE A ON A.HANDLE  = S.HANDLEAMBIENTE\nWHERE A.NOME = '$Ambiente'",
+          "description": null,
+          "error": null,
+          "hide": 0,
+          "includeAll": true,
+          "label": null,
+          "multi": true,
+          "name": "Sistema",
+          "options": [
+            {
+              "selected": true,
+              "text": "All",
+              "value": "$__all"
+            },
+            {
+              "selected": false,
+              "text": "QUALIDADEAGCORRENTE",
+              "value": "QUALIDADEAGCORRENTE"
+            },
+            {
+              "selected": false,
+              "text": "QUALIDADEAGHOM",
+              "value": "QUALIDADEAGHOM"
+            },
+            {
+              "selected": false,
+              "text": "Portal 1.3",
+              "value": "Portal 1.3"
+            },
+            {
+              "selected": false,
+              "text": "Portal 1.4",
+              "value": "Portal 1.4"
+            },
+            {
+              "selected": false,
+              "text": "WebappQMPU_CORRENTE",
+              "value": "WebappQMPU_CORRENTE"
+            },
+            {
+              "selected": false,
+              "text": "WebAppQTRF_CORRENTE",
+              "value": "WebAppQTRF_CORRENTE"
+            },
+            {
+              "selected": false,
+              "text": "WebAppQCaixa_CORRENTE",
+              "value": "WebAppQCaixa_CORRENTE"
+            },
+            {
+              "selected": false,
+              "text": "WebappQFRG_CORRENTE",
+              "value": "WebappQFRG_CORRENTE"
+            },
+            {
+              "selected": false,
+              "text": "WebAppQINB_CORRENTE",
+              "value": "WebAppQINB_CORRENTE"
+            },
+            {
+              "selected": false,
+              "text": "WebAppQPMDF_Corrente",
+              "value": "WebAppQPMDF_Corrente"
+            },
+            {
+              "selected": false,
+              "text": "WebAppQPostal_CORRENTE",
+              "value": "WebAppQPostal_CORRENTE"
+            },
+            {
+              "selected": false,
+              "text": "WebAppQReciprev_Corrente",
+              "value": "WebAppQReciprev_Corrente"
+            },
+            {
+              "selected": false,
+              "text": "WebAppQSenado_Corrente",
+              "value": "WebAppQSenado_Corrente"
+            },
+            {
+              "selected": false,
+              "text": "WebAppQSTF_Corrente",
+              "value": "WebAppQSTF_Corrente"
+            },
+            {
+              "selected": false,
+              "text": "WebAppQCamed_CORRENTE",
+              "value": "WebAppQCamed_CORRENTE"
+            }
+          ],
+          "query": "SELECT S.NOME\nFROM SISTEMA S\nJOIN AMBIENTE A ON A.HANDLE  = S.HANDLEAMBIENTE\nWHERE A.NOME = '$Ambiente'",
+          "refresh": 0,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "tagValuesQuery": "",
+          "tags": [],
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        }
+      ]
+    },
+    "time": {
+      "from": "now-2d",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ]
+    },
+    "timezone": "",
+    "title": "Proporção de Disponibilidade",
+    "uid": "mo4YEMznk",
+    "version": 15
+  }

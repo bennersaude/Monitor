@@ -33,10 +33,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           }
@@ -70,7 +66,7 @@
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT\n  DATEDIFF(second, '1970-01-01', getdate()) AS time,\n  count(1) as value,\n  'Qtd Operadoras' as metric\nFROM\n  Sistema S\nJOIN\n  Ambiente A on A.handle = S.HandleAmbiente\nWHERE 1=1\n  --(A.Nome = '$Ambiente' or '$Ambiente' = '** TODOS **')\n  \n\n",
+          "rawSql": "SELECT\n  DATEDIFF(second, '1970-01-01', getdate()) AS time,\n  count(1) as value,\n  'Qtd Operadoras' as metric\nFROM\n  Sistema S\nJOIN\n  Ambiente A on A.handle = S.HandleAmbiente\nWHERE 1=1\n  and A.MonitoramentoAtivo = 1\n  --(A.Nome = '$Ambiente' or '$Ambiente' = '** TODOS **')\n  \n\n",
           "refId": "A"
         }
       ],
@@ -179,7 +175,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 13,
+        "h": 28,
         "w": 24,
         "x": 0,
         "y": 3
@@ -294,6 +290,9 @@
         "notifications": [
           {
             "uid": "kwQbnwlMz"
+          },
+          {
+            "uid": "FyptWE6Mz"
           }
         ]
       },
@@ -315,7 +314,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 16
+        "y": 31
       },
       "hiddenSeries": false,
       "id": 8,
@@ -455,6 +454,9 @@
         "notifications": [
           {
             "uid": "kwQbnwlMz"
+          },
+          {
+            "uid": "FyptWE6Mz"
           }
         ]
       },
@@ -476,18 +478,21 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 23
+        "y": 38
       },
       "hiddenSeries": false,
       "id": 11,
       "legend": {
+        "alignAsTable": false,
         "avg": false,
-        "current": false,
+        "current": true,
+        "hideEmpty": false,
         "max": false,
         "min": false,
+        "rightSide": false,
         "show": true,
-        "total": false,
-        "values": false
+        "total": true,
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -572,6 +577,169 @@
       }
     },
     {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                1
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "10m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "count"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "10m",
+        "frequency": "1m",
+        "handler": 1,
+        "message": "Existem sistemas do Ambiente da Qualidade que estão com falha",
+        "name": "Alerta de Falhas na Qualidade",
+        "noDataState": "ok",
+        "notifications": [
+          {
+            "uid": "WNzyFOR7k"
+          },
+          {
+            "uid": "x_oBpdgnz"
+          },
+          {
+            "uid": "gkZ2HKR7k"
+          }
+        ]
+      },
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 45
+      },
+      "hiddenSeries": false,
+      "id": 12,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": true,
+        "hideEmpty": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": true,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.2",
+      "pointradius": 2,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:2365",
+          "alias": "Erro",
+          "color": "#F2495C",
+          "fill": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "",
+          "format": "time_series",
+          "rawSql": "SELECT \r\n  X.time,\r\n  SUM(X.value) AS VALUE,\r\n  x.metric\r\nfrom (\r\nSELECT\r\n  $__timeEpoch(C.DataHoraBateriaTestes),\r\n  count(1) as value,\r\n  S.nome as metric\r\nFROM\r\n  WebServiceCheck C\r\nJOIN \r\n  Sistema S on S.Handle = C.HandleSistema\r\nJOIN \r\n  Ambiente A on A.Handle = C.HandleAmbiente  \r\nWHERE\r\n  $__timeFilter(C.DataHoraBateriaTestes)\r\n  and C.Url is not null\r\n  and A.Nome like 'Qualidade'\r\n  and ISNULL(C.HttpStatusResposta, 0) != 200\r\nGROUP BY C.DataHoraBateriaTestes, S.Nome\r\n) x\r\nGROUP BY X.time, X.metric\r\nORDER BY 1 ASC",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 1,
+          "visible": true
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Serviços da Qualidade com Falha",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:2322",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:2323",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
       "dashboardFilter": "",
       "dashboardTags": [],
       "datasource": null,
@@ -583,10 +751,10 @@
       },
       "folderId": null,
       "gridPos": {
-        "h": 5,
-        "w": 11,
+        "h": 10,
+        "w": 7,
         "x": 0,
-        "y": 30
+        "y": 52
       },
       "id": 10,
       "limit": "5",
@@ -627,5 +795,5 @@
   "timezone": "",
   "title": "Disponibilidade Geral",
   "uid": "djUbPDlGa",
-  "version": 15
+  "version": 36
 }

@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 3,
-  "iteration": 1618416964336,
+  "iteration": 1634293289997,
   "links": [],
   "panels": [
     {
@@ -180,7 +180,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 13,
+        "h": 19,
         "w": 24,
         "x": 0,
         "y": 3
@@ -233,6 +233,201 @@
         "labelTemplate": "",
         "usingSplitLabel": false
       }
+    },
+    {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                1
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "10m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "count"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "10m",
+        "frequency": "1m",
+        "handler": 1,
+        "message": "Existem sistemas do Ambiente do Jurídico que estão com falha",
+        "name": "Alerta de Falhas nos Sistemas do Juridico",
+        "noDataState": "ok",
+        "notifications": [
+          {
+            "uid": "B2ehyG4nk"
+          }
+        ]
+      },
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 22
+      },
+      "hiddenSeries": false,
+      "id": 8,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": true,
+        "hideEmpty": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": true,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.2",
+      "pointradius": 2,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:2365",
+          "alias": "Erro",
+          "color": "#F2495C",
+          "fill": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "",
+          "format": "time_series",
+          "rawSql": "SELECT \r\n  X.time,\r\n  SUM(X.value) AS VALUE,\r\n  x.metric\r\nfrom (\r\nSELECT\r\n  $__timeEpoch(C.DataHoraBateriaTestes),\r\n  count(1) as value,\r\n  S.nome as metric\r\nFROM\r\n  WebServiceCheck C\r\nJOIN \r\n  Sistema S on S.Handle = C.HandleSistema\r\nJOIN \r\n  Ambiente A on A.Handle = C.HandleAmbiente  \r\nWHERE\r\n  $__timeFilter(C.DataHoraBateriaTestes)\r\n  and C.Url is not null\r\n  and A.Nome like 'Jurídico - Produção'\r\n  and ISNULL(C.HttpStatusResposta, 0) != 200\r\nGROUP BY C.DataHoraBateriaTestes, S.Nome\r\n) x\r\nGROUP BY X.time, X.metric\r\nORDER BY 1 ASC",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 1,
+          "visible": true
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Serviços do Juridico com Falha",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:2322",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:2323",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "dashboardFilter": "",
+      "dashboardTags": [],
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "folderId": null,
+      "gridPos": {
+        "h": 7,
+        "w": 7,
+        "x": 0,
+        "y": 29
+      },
+      "id": 10,
+      "limit": "5",
+      "nameFilter": "Juridico",
+      "onlyAlertsOnDashboard": false,
+      "pluginVersion": "7.4.2",
+      "show": "current",
+      "sortOrder": 1,
+      "stateFilter": [],
+      "targets": [
+        {
+          "alias": "",
+          "format": "time_series",
+          "rawSql": "SELECT\n  $__timeEpoch(<time_column>),\n  <value column> as value,\n  <series name column> as metric\nFROM\n  <table name>\nWHERE\n  $__timeFilter(time_column)\nORDER BY\n  <time_column> ASC",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Alertas",
+      "type": "alertlist"
     }
   ],
   "refresh": "1m",
@@ -247,8 +442,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "Produção Clientes AG",
-          "value": "Produção Clientes AG"
+          "text": "Jurídico - Produção",
+          "value": "Jurídico - Produção"
         },
         "datasource": null,
         "definition": "SELECT Nome FROM Ambiente",
@@ -281,5 +476,5 @@
   "timezone": "",
   "title": "Disponibilidade por Ambiente",
   "uid": "djUdPDlGz",
-  "version": 2
+  "version": 7
 }
